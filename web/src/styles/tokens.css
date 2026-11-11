@@ -1,11 +1,29 @@
-/* Identidad visual de Blanchard Group LLC. Única fuente de colores. */
+/*
+ * Identidad visual Blanchard Group LLC (colores verificados contra el logo:
+ * azul ≈ #072046, dorado ≈ #B98D42 con reflejos #DCB35C y sombras #A87522).
+ * Única fuente de colores y tipografías.
+ */
 @theme {
+  /* Azules */
   --color-navy: #041b3c;
   --color-deep: #082650;
+  --color-steel: #123a70;
+  --color-navy-50: #eef2f8;
+  --color-navy-100: #dbe4f1;
+
+  /* Dorados: gold-dark para texto pequeño sobre claro (contraste ≥ 6:1) */
   --color-gold: #b78b40;
-  --color-white: #ffffff;
-  --color-mist-50: #f8f9fb;
-  --color-mist-100: #f1f3f6;
-  --color-mist-200: #e6e9ee;
+  --color-gold-light: #dcb35c;
+  --color-gold-dark: #7f5c1f;
+  --color-gold-tint: #f4ead6;
+
+  /* Grises claros */
+  --color-mist-50: #f7f8fa;
+  --color-mist-100: #eff1f5;
+  --color-mist-200: #e1e5eb;
+  --color-line: #dde2ea;
+  --color-ink-soft: #465671;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
 }

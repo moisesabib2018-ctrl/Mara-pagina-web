@@ -1,18 +1,21 @@
 import type { Locale } from "@/config/site";
+import type { ServiceId } from "@/config/service-slugs";
 
-export type ServiceSlug =
-  | "taxes-individuales"
-  | "taxes-corporativos"
-  | "creacion-de-empresas"
-  | "itin"
-  | "seguros-de-vida"
-  | "seguros-de-salud";
+export type Localized<T = string> = Record<Locale, T>;
 
-export type Localized = Record<Locale, string>;
+export type Step = { title: string; text: string };
 
+/** Contenido de una página de servicio. BORRADOR: requiere aprobación de la asesora. */
 export type Service = {
-  slug: ServiceSlug;
+  id: ServiceId;
   name: Localized;
-  /** Descripción aprobada por el cliente. null = pendiente, no se muestra. */
-  summary: Localized | null;
+  /** Resumen de una línea para tarjetas. */
+  short: Localized;
+  /** Introducción de la página. */
+  lead: Localized;
+  forWhom: Localized<string[]>;
+  steps: Localized<Step[]>;
+  bring: Localized<string[]>;
+  /** Aclaración importante (p. ej. depende del IRS o de la aseguradora). */
+  note?: Localized;
 };

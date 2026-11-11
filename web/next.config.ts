@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
+import { serviceIds, serviceSlugs } from "./src/config/service-slugs";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {
@@ -11,6 +11,13 @@ const nextConfig: NextConfig = {
         as: "*.css",
       },
     },
+  },
+  // URLs en inglés (/en/services/individual-taxes) sirven la ruta canónica (/en/servicios/taxes-individuales).
+  async rewrites() {
+    return serviceIds.map((id) => ({
+      source: `/en/services/${serviceSlugs[id].en}`,
+      destination: `/en/servicios/${id}`,
+    }));
   },
 };
 

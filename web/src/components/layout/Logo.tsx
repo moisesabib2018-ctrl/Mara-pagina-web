@@ -1,21 +1,20 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
 
-/** Usa el logo original sin alterar proporciones; texto solo mientras falte el archivo. */
-export function Logo({ className }: { className?: string }) {
+/** Logo original sin deformar: el alto se calcula con la proporción real del archivo. */
+export function Logo({ size = 56, className, priority }: { size?: number; className?: string; priority?: boolean }) {
   const { logo, name } = siteConfig;
-  if (!logo) {
-    return <span className={className}>{name}</span>;
-  }
+  const height = Math.round((size * logo.height) / logo.width);
   return (
     <Image
       src={logo.src}
-      width={logo.width}
-      height={logo.height}
+      width={size}
+      height={height}
+      sizes={`${size}px`}
       alt={name}
       className={className}
-      style={{ height: "auto", width: "auto", objectFit: "contain" }}
-      priority
+      style={{ width: size, height: "auto", objectFit: "contain" }}
+      priority={priority}
     />
   );
 }
