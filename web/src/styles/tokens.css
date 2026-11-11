@@ -1,0 +1,11 @@
+/* Identidad visual de Blanchard Group LLC. Única fuente de colores. */
+@theme {
+  --color-navy: #041b3c;
+  --color-deep: #082650;
+  --color-gold: #b78b40;
+  --color-white: #ffffff;
+  --color-mist-50: #f8f9fb;
+  --color-mist-100: #f1f3f6;
+  --color-mist-200: #e6e9ee;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
