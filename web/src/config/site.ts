@@ -27,8 +27,24 @@ export const siteConfig = {
     region: "Texas",
     regionCode: "TX",
     inPerson: true,
-    /** Fotografía de fondo de la sección "De Houston, para Houston". Pendiente: solo con licencia de uso comprobada. */
-    photo: null as { src: string; width: number; height: number; credit?: string } | null,
+    /** Fotografía de fondo de "De Houston, para Houston" (Wikimedia Commons, licencia comprobada). Cambiable por una foto propia. */
+    photo: {
+      src: "/images/houston-skyline.jpg",
+      width: 1920,
+      height: 960,
+      // Licencia CC BY 4.0: exige dar crédito al autor, enlazar la licencia e indicar que se modificó (recorte y capa de color).
+      credit: {
+        author: "David Daniel Turner",
+        license: "CC BY 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Downtown_Houston,_TX_Skyline_-_2018.jpg",
+      },
+    } as {
+      src: string;
+      width: number;
+      height: number;
+      credit?: { author: string; license: string; licenseUrl: string; sourceUrl: string };
+    } | null,
   },
   advisor: {
     name: "Mariamna Blanchard Hernandez" as string | null,

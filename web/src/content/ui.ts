@@ -145,6 +145,8 @@ const es = {
     title: "De Houston, para Houston",
     text: "Blanchard Group LLC atiende en persona en Houston, Texas, y en tu idioma: español o inglés. Nada de call centers ni respuestas copiadas — una asesora real, cerca de ti.",
     cta: "Agenda tu cita presencial",
+    creditPrefix: "Foto:",
+    creditSuffix: "vía Wikimedia Commons. Recortada y con capa de color.",
   },
   footer: {
     services: "Servicios",
@@ -335,6 +337,8 @@ const en: Dictionary = {
     title: "From Houston, for Houston",
     text: "Blanchard Group LLC serves clients in person in Houston, Texas, in your language: English or Spanish. No call centers or canned replies — a real advisor, close to you.",
     cta: "Book your in-person appointment",
+    creditPrefix: "Photo:",
+    creditSuffix: "via Wikimedia Commons. Cropped, with a color overlay.",
   },
   footer: {
     services: "Services",

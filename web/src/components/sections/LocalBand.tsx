@@ -34,7 +34,18 @@ export function LocalBand({ locale }: { locale: Locale }) {
         <ButtonLink href={homePath(locale, "agenda")} size="lg" className="mt-9">
           {local.cta}
         </ButtonLink>
-        {photo?.credit ? <p className="mt-10 text-[0.7rem] text-white/60">{photo.credit}</p> : null}
+        {photo?.credit ? (
+          <p className="mt-12 text-xs leading-relaxed text-white/70">
+            {local.creditPrefix} {photo.credit.author} ·{" "}
+            <a href={photo.credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white">
+              {photo.credit.license}
+            </a>{" "}
+            ·{" "}
+            <a href={photo.credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white">
+              {local.creditSuffix}
+            </a>
+          </p>
+        ) : null}
       </Container>
     </section>
   );
