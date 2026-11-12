@@ -21,10 +21,12 @@ export const siteConfig = {
     phone: publicEnv.phone, // NEXT_PUBLIC_PHONE
     address: null as string | null,
   },
+  /** Zona de servicio confirmada por el cliente. La dirección exacta sigue pendiente (contact.address). */
+  location: { city: "Houston", region: "Texas", regionCode: "TX", inPerson: true },
   advisor: {
-    name: null as string | null,
-    photo: null as { src: string; width: number; height: number } | null,
-    bio: null as { es: string; en: string } | null,
+    name: "Mariamna Blanchard Hernandez" as string | null,
+    photo: { src: "/images/mariamna-blanchard-hernandez.jpg", width: 1600, height: 1066 } as { src: string; width: number; height: number } | null,
+    bio: null as { es: string; en: string } | null, // biografía y credenciales: pendientes
   },
   locales: ["es", "en"] as const,
   defaultLocale: "es" as const,

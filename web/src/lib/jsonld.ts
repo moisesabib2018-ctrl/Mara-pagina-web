@@ -23,6 +23,9 @@ export function organizationJsonLd() {
     name: siteConfig.name,
     url: siteConfig.url,
     logo: `${siteConfig.url}${siteConfig.logo.src}`,
+    // Solo ciudad y estado confirmados; la dirección exacta sigue pendiente.
+    address: { "@type": "PostalAddress", addressLocality: siteConfig.location.city, addressRegion: siteConfig.location.regionCode, addressCountry: "US" },
+    areaServed: { "@type": "City", name: siteConfig.location.city },
   };
 }
 

@@ -20,6 +20,7 @@ export function Footer({ locale }: { locale: Locale }) {
             <Logo size={88} />
           </div>
           <p translate="no" className="mt-4 font-serif text-lg">{siteConfig.name}</p>
+          <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/70">{dict.footer.tagline}</p>
         </div>
 
         <nav aria-label={dict.footer.services}>

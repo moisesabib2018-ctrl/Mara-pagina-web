@@ -8,6 +8,8 @@ import { Booking } from "@/components/sections/Booking";
 import { Contact } from "@/components/sections/Contact";
 import { FAQ } from "@/components/sections/FAQ";
 import { Hero } from "@/components/sections/Hero";
+import { KeyDatesSection } from "@/components/sections/KeyDatesSection";
+import { LocalBand } from "@/components/sections/LocalBand";
 import { Process } from "@/components/sections/Process";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
 import { TrustStrip } from "@/components/sections/TrustStrip";
@@ -37,10 +39,12 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <TrustStrip locale={locale} />
       <ServiceGrid locale={locale} />
       <Process locale={locale} />
+      <KeyDatesSection locale={locale} />
       <AdvisorIntro locale={locale} />
       <Booking locale={locale} />
       <FAQ locale={locale} />
       <Contact locale={locale} />
+      <LocalBand locale={locale} />
     </>
   );
 }
