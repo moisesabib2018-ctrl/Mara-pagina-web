@@ -49,17 +49,6 @@ export function ServiceDetail({ locale, service }: { locale: Locale; service: Se
           <Eyebrow className="mt-8">{dict.services.eyebrow}</Eyebrow>
           <h1 className="mt-4 text-balance font-serif text-5xl leading-[1.05] tracking-tight text-navy sm:text-6xl">{service.name[locale]}</h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl">{service.lead[locale]}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href={homePath(locale, "agenda")} size="lg">
-              {dict.cta.book}
-              <ArrowRight />
-            </ButtonLink>
-            {wa ? (
-              <ButtonLink href={wa} external variant="outline" size="lg">
-                {dict.cta.whatsapp}
-              </ButtonLink>
-            ) : null}
-          </div>
         </Container>
       </section>
 
