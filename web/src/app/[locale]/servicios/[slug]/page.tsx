@@ -8,6 +8,12 @@ import { Booking } from "@/components/sections/Booking";
 import { ServiceDetail } from "@/components/sections/ServiceDetail";
 import { JsonLd } from "@/components/ui/JsonLd";
 
+/**
+ * Las 6 páginas de servicio se generan estáticas (generateStaticParams). Se desactiva solo el aviso de desarrollo
+ * "navegación instantánea" de Next, que pide envolver `params` en <Suspense>; no cambia el resultado en producción.
+ */
+export const instant = false;
+
 /** Ruta canónica interna. En inglés se sirve como /en/services/<slug> mediante rewrites (next.config.ts). */
 export function generateStaticParams() {
   return locales.flatMap((locale) => serviceIds.map((slug) => ({ locale, slug })));
