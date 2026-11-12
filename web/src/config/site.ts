@@ -51,6 +51,8 @@ export const siteConfig = {
     photo: { src: "/images/advisor-portrait.jpg", width: 1600, height: 1066 } as { src: string; width: number; height: number } | null,
     bio: null as { es: string; en: string } | null, // biografía y credenciales: pendientes
   },
+  /** true mientras los textos legales (privacidad y términos) no estén revisados por un abogado: muestra un aviso. */
+  legalDraft: true,
   locales: ["es", "en"] as const,
   defaultLocale: "es" as const,
   booking: {

@@ -170,6 +170,8 @@ const es = {
     services: "Servicios",
     explore: "Explorar",
     tagline: "Taxes, empresas y seguros · Houston, Texas · Atención en español e inglés",
+    privacy: "Privacidad",
+    terms: "Términos",
     contact: "Contacto",
     rights: "© Blanchard Group LLC. Todos los derechos reservados.",
     disclaimer:
@@ -201,6 +203,10 @@ const es = {
     asideText: "45 minutos para revisar tu caso y resolver tus dudas.",
     others: "Otros servicios",
     note: "Importante",
+  },
+  legal: {
+    draftNotice: "Borrador pendiente de revisión legal. Este texto puede cambiar antes del lanzamiento.",
+    emailLine: "También puedes escribirnos a",
   },
   notFound: {
     title: "Página no encontrada",
@@ -380,6 +386,8 @@ const en: Dictionary = {
     services: "Services",
     explore: "Explore",
     tagline: "Taxes, business and insurance · Houston, Texas · Service in English and Spanish",
+    privacy: "Privacy",
+    terms: "Terms",
     contact: "Contact",
     rights: "© Blanchard Group LLC. All rights reserved.",
     disclaimer:
@@ -411,6 +419,10 @@ const en: Dictionary = {
     asideText: "45 minutes to review your case and answer your questions.",
     others: "Other services",
     note: "Important",
+  },
+  legal: {
+    draftNotice: "Draft pending legal review. This text may change before launch.",
+    emailLine: "You can also write to us at",
   },
   notFound: {
     title: "Page not found",

@@ -30,7 +30,13 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   return {
     title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
     description: dict.meta.description,
-    icons: { icon: siteConfig.logo.src },
+    icons: {
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/brand/icon-192.png", sizes: "192x192", type: "image/png" },
+      ],
+      apple: "/brand/apple-touch-icon.png",
+    },
     // El sitio ya es bilingüe: evita que el traductor automático altere la marca y el contenido.
     other: { google: "notranslate" },
     // Sitio no publicado: sin indexación hasta el lanzamiento.
@@ -41,8 +47,19 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
           metadataBase: new URL(siteConfig.url),
           alternates: { languages: { es: "/es", en: "/en", "x-default": "/es" } },
         }
-      : {}),
-    openGraph: { siteName: siteConfig.name, locale: locale === "es" ? "es_US" : "en_US", type: "website" },
+      : // Sin dominio propio (p. ej. demo en Vercel) las URLs de la imagen para compartir usan la dirección del despliegue.
+        process.env.VERCEL_URL
+        ? { metadataBase: new URL(`https://${process.env.VERCEL_URL}`) }
+        : {}),
+    openGraph: {
+      siteName: siteConfig.name,
+      title: siteConfig.name,
+      description: dict.meta.description,
+      locale: locale === "es" ? "es_US" : "en_US",
+      type: "website",
+      images: [{ url: "/brand/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
+    },
+    twitter: { card: "summary_large_image", title: siteConfig.name, description: dict.meta.description, images: ["/brand/og-image.png"] },
   };
 }
 

@@ -12,3 +12,30 @@ describe("routes", () => {
     expect(switchLocalePath("/es", "en")).toBe("/en");
   });
 });
+
+import { isInvalidPublicPath } from "@/config/service-slugs";
+import { legalPath } from "./routes";
+
+describe("páginas legales y URLs inválidas", () => {
+  it("rutas públicas por idioma", () => {
+    expect(legalPath("es", "privacy")).toBe("/es/privacidad");
+    expect(legalPath("en", "privacy")).toBe("/en/privacy");
+    expect(legalPath("en", "terms")).toBe("/en/terms");
+  });
+  it("cambiar de idioma conserva la página legal", () => {
+    expect(switchLocalePath("/es/privacidad", "en")).toBe("/en/privacy");
+    expect(switchLocalePath("/en/terms", "es")).toBe("/es/terminos");
+  });
+  it("detecta URLs inválidas que darían 200", () => {
+    expect(isInvalidPublicPath("/es/servicios/no-existe")).toBe(true);
+    expect(isInvalidPublicPath("/en/servicios/itin")).toBe(true);
+    expect(isInvalidPublicPath("/en/privacidad")).toBe(true);
+  });
+  it("no bloquea las URLs válidas", () => {
+    expect(isInvalidPublicPath("/es/servicios/itin")).toBe(false);
+    expect(isInvalidPublicPath("/en/services/itin")).toBe(false);
+    expect(isInvalidPublicPath("/es/privacidad")).toBe(false);
+    expect(isInvalidPublicPath("/en/privacy")).toBe(false);
+    expect(isInvalidPublicPath("/es")).toBe(false);
+  });
+});

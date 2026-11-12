@@ -25,7 +25,7 @@ export function Header({ locale }: { locale: Locale }) {
         <Link href={homePath(locale)} aria-label={dict.a11y.home} className="flex items-center gap-3">
           {/* alt vacío: el enlace ya tiene aria-label y el nombre aparece como texto al lado */}
           <Logo size={56} priority alt="" />
-          <span translate="no" className="hidden font-serif text-lg font-medium tracking-wide text-navy sm:inline">{siteConfig.name}</span>
+          <span translate="no" className="hidden whitespace-nowrap font-serif text-lg font-medium tracking-wide text-navy sm:inline lg:hidden xl:inline">{siteConfig.name}</span>
         </Link>
 
         <nav aria-label="Principal" className="hidden items-center gap-7 lg:flex">

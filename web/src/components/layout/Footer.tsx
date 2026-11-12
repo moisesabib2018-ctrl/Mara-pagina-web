@@ -3,7 +3,7 @@ import { siteConfig, type Locale } from "@/config/site";
 import { services } from "@/content/services";
 import { getDictionary } from "@/content/ui";
 import { getChannels } from "@/lib/contact";
-import { homePath, servicePath } from "@/lib/routes";
+import { homePath, legalPath, servicePath } from "@/lib/routes";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "./Logo";
 
@@ -78,7 +78,15 @@ export function Footer({ locale }: { locale: Locale }) {
       <div className="border-t border-white/15">
         <Container className="space-y-2 py-6 pr-[4.5rem] text-xs leading-relaxed text-white/60 sm:pr-8">
           <p>{dict.footer.disclaimer}</p>
-          <p>{dict.footer.rights}</p>
+          <p className="flex flex-wrap items-center gap-x-5 gap-y-1">
+            <span>{dict.footer.rights}</span>
+            <Link href={legalPath(locale, "privacy")} className="inline-flex min-h-9 items-center underline underline-offset-4 hover:text-white">
+              {dict.footer.privacy}
+            </Link>
+            <Link href={legalPath(locale, "terms")} className="inline-flex min-h-9 items-center underline underline-offset-4 hover:text-white">
+              {dict.footer.terms}
+            </Link>
+          </p>
         </Container>
       </div>
     </footer>
