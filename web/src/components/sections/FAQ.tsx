@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function FAQ({ locale }: { locale: Locale }) {
   const { faq } = getDictionary(locale);
   return (
-    <section id="preguntas" aria-labelledby="preguntas-title" className="bg-white py-16 sm:py-24">
+    <section id="preguntas" aria-labelledby="preguntas-title" className="view bg-white py-16 sm:py-24">
       <Container className="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <SectionHeading id="preguntas-title" eyebrow={faq.eyebrow} title={faq.title} />
         <div className="space-y-3">

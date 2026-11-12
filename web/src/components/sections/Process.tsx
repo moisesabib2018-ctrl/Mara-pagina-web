@@ -6,7 +6,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function Process({ locale }: { locale: Locale }) {
   const { process } = getDictionary(locale);
   return (
-    <section id="proceso" aria-labelledby="proceso-title" className="bg-white py-16 sm:py-24">
+    <section id="proceso" aria-labelledby="proceso-title" className="view bg-white py-16 sm:py-24">
       <Container>
         <SectionHeading id="proceso-title" eyebrow={process.eyebrow} title={process.title} />
         <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

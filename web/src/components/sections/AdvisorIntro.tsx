@@ -16,7 +16,7 @@ export function AdvisorIntro({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const { name, photo, bio } = siteConfig.advisor;
   return (
-    <section id="asesora" aria-labelledby="asesora-title" className="border-b border-line bg-ivory-200 py-16 sm:py-24">
+    <section id="asesora" aria-labelledby="asesora-title" className="view border-b border-line bg-ivory-200 py-16 sm:py-24">
       <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
         {photo ? (
           // Marco blanco suave; el recorte conserva el aspecto de la foto (sin deformar) y deja ver el rostro completo.

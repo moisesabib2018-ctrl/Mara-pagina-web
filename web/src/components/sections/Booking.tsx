@@ -18,7 +18,7 @@ export function Booking({ locale }: { locale: Locale }) {
   const channels = getChannels(locale).filter((c) => c.key === "whatsapp" || c.key === "email" || c.key === "phone");
 
   return (
-    <section id="agenda" aria-labelledby="agenda-title" className="bg-deep py-16 sm:py-24">
+    <section id="agenda" aria-labelledby="agenda-title" className="view bg-deep py-16 sm:py-24">
       <Container>
         <SectionHeading id="agenda-title" light eyebrow={dict.booking.eyebrow} title={dict.booking.title} text={dict.booking.text} />
 

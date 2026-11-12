@@ -12,7 +12,7 @@ export function Contact({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const channels = getChannels(locale);
   return (
-    <section id="contacto" aria-labelledby="contacto-title" className="bg-ivory py-16 sm:py-24">
+    <section id="contacto" aria-labelledby="contacto-title" className="view bg-ivory py-16 sm:py-24">
       <Container className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <div>
           <SectionHeading id="contacto-title" eyebrow={dict.contact.eyebrow} title={dict.contact.title} text={siteConfig.contactForm.enabled ? dict.contact.text : dict.contact.builder.text} />

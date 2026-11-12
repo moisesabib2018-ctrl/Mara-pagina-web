@@ -15,7 +15,7 @@ export function LocalBand({ locale }: { locale: Locale }) {
   const { local } = getDictionary(locale);
   const photo = siteConfig.location.photo;
   return (
-    <section aria-labelledby="local-title" className="relative isolate overflow-hidden bg-deep py-20 sm:py-28">
+    <section aria-labelledby="local-title" className="view relative isolate overflow-hidden bg-deep py-20 sm:py-28">
       {photo ? (
         <>
           <Image src={photo.src} width={photo.width} height={photo.height} alt="" sizes="100vw" loading="lazy" className="absolute inset-0 -z-20 size-full object-cover" />

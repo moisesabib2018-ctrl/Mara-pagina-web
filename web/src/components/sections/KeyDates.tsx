@@ -52,7 +52,7 @@ export function KeyDates({ cards, labels }: { cards: KeyDateCard[]; labels: Dict
   if (visible.length === 0) return null;
 
   return (
-    <section id="fechas" aria-labelledby="fechas-title" className="bg-ivory py-16 sm:py-24">
+    <section id="fechas" aria-labelledby="fechas-title" className="view bg-ivory py-16 sm:py-24">
       <Container>
         <SectionHeading id="fechas-title" eyebrow={labels.eyebrow} title={labels.title} text={labels.text} />
         <ul className="mt-12 grid gap-5 md:grid-cols-3">

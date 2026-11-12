@@ -10,7 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function ServiceGrid({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   return (
-    <section id="servicios" aria-labelledby="servicios-title" className="bg-ivory py-16 sm:py-24">
+    <section id="servicios" aria-labelledby="servicios-title" className="view bg-ivory py-16 sm:py-24">
       <Container>
         <SectionHeading id="servicios-title" eyebrow={dict.services.eyebrow} title={dict.services.title} text={dict.services.text} />
         <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
