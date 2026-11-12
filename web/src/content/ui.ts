@@ -37,9 +37,6 @@ const es = {
     titleLead: "Taxes, empresas y seguros, con",
     titleAccent: "atención personal.",
     text: "Asesoría en español e inglés para tus impuestos, tu empresa y la protección de tu familia. Agenda una consulta de 45 minutos y resuelve tus dudas.",
-    role: "Tu asesora",
-    photoAlt: ", asesora de Blanchard Group LLC",
-    minutes: "min",
   },
   trust: [
     { value: "6", label: "servicios en un solo lugar" },
@@ -66,6 +63,8 @@ const es = {
     title: "Atención personal en cada consulta",
     text: "Hablas directamente con la asesora de Blanchard Group LLC sobre tu situación y tus preguntas.",
     text2: "Antes de tu cita puedes revisar la página del servicio para saber qué información conviene preparar.",
+    photoAlt: ", asesora de Blanchard Group LLC",
+    facts: ["Consulta uno a uno de 45 minutos", "En persona en Houston, Texas", "En español o en inglés"],
   },
   booking: {
     eyebrow: "Agenda",
@@ -229,9 +228,6 @@ const en: Dictionary = {
     titleLead: "Taxes, business, and insurance, with",
     titleAccent: "personal attention.",
     text: "Guidance in English and Spanish for your taxes, your business, and your family's protection. Book a 45-minute consultation and get your questions answered.",
-    role: "Your advisor",
-    photoAlt: ", advisor at Blanchard Group LLC",
-    minutes: "min",
   },
   trust: [
     { value: "6", label: "services in one place" },
@@ -258,6 +254,8 @@ const en: Dictionary = {
     title: "Personal attention in every consultation",
     text: "You speak directly with the Blanchard Group LLC advisor about your situation and your questions.",
     text2: "Before your appointment you can review the service page to know what information to prepare.",
+    photoAlt: ", advisor at Blanchard Group LLC",
+    facts: ["One-on-one 45-minute consultation", "In person in Houston, Texas", "In English or Spanish"],
   },
   booking: {
     eyebrow: "Booking",

@@ -37,10 +37,10 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <JsonLd data={organizationJsonLd()} />
       <Hero locale={locale} />
       <TrustStrip locale={locale} />
+      <AdvisorIntro locale={locale} />
       <ServiceGrid locale={locale} />
       <Process locale={locale} />
       <KeyDatesSection locale={locale} />
-      <AdvisorIntro locale={locale} />
       <Booking locale={locale} />
       <FAQ locale={locale} />
       <Contact locale={locale} />
