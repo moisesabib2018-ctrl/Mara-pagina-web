@@ -34,8 +34,8 @@ const es = {
   },
   hero: {
     eyebrow: "Taxes · Empresas · Seguros",
-    titleLead: "Taxes, empresas y seguros, con",
-    titleAccent: "atención personal.",
+    titleLead: "Taxes, empresas y seguros, con",
+    titleAccent: "atención personalizada.",
     text: "Tus impuestos, tu negocio y tu familia merecen más que una respuesta rápida. Merecen alguien que te escuche, te oriente con claridad y te acompañe paso a paso. Atención cercana y personalizada.",
   },
   services: {
@@ -221,7 +221,7 @@ const en: Dictionary = {
   hero: {
     eyebrow: "Taxes · Business · Insurance",
     titleLead: "Taxes, business, and insurance, with",
-    titleAccent: "personal attention.",
+    titleAccent: "personalized attention.",
     text: "Your taxes, your business, and your family deserve more than a quick answer. They deserve someone who listens, guides you clearly, and walks with you step by step. Close, personalized attention.",
   },
   services: {

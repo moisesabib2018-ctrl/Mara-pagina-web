@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { type Locale } from "@/config/site";
+import { siteConfig, type Locale } from "@/config/site";
 import type { ServiceId } from "@/config/service-slugs";
 import { services } from "@/content/services";
 import { servicePath } from "@/lib/routes";
@@ -134,10 +135,14 @@ const tiles: Tile[] = [
   { id: "seguros-de-salud", tone: "dark", Art: IllHealth },
 ];
 
+/** Radio del anillo de tarjetas en % del lienzo (el aro interior del ArcMotif mide 23 %): los centros quedan sobre esa línea. */
+const ORBIT = 24;
+
 /**
- * Las seis ilustraciones dentro del círculo de aros del logo (solo escritorio). Todo el conjunto escala con el ancho del
- * círculo (porcentajes) para que ninguna tarjeta se salga del aro exterior. Al pasar el mouse (o enfocar con teclado) la
- * tarjeta "salta" hacia adelante como si se estuviera seleccionando; cada una abre la página de su servicio.
+ * Las seis ilustraciones dentro del círculo de aros del logo (solo escritorio): forman un anillo sobre la línea del aro
+ * interior, con el logo original en el centro. Todo se mide en % del lienzo, de modo que escala con el círculo y ninguna
+ * tarjeta se sale del aro exterior. Al pasar el mouse (o enfocar con teclado) la tarjeta "salta" como si se seleccionara;
+ * cada una abre la página de su servicio.
  */
 export function HeroVisual({ locale }: { locale: Locale }) {
   return (
@@ -145,31 +150,39 @@ export function HeroVisual({ locale }: { locale: Locale }) {
     <div className="relative hidden w-[117.6%] -ml-[8.8%] lg:block">
       <div className="relative aspect-square">
         <ArcMotif className="absolute inset-0 size-full" />
-        <ul
-          data-hero-tiles
-          className="absolute left-1/2 top-1/2 grid w-[42%] xl:w-[39%] -translate-x-1/2 -translate-y-1/2 grid-cols-2 gap-[4%]"
-        >
-          {tiles.map(({ id, tone, Art }) => {
+
+        {/* Logo original (sin recortar ni deformar) dentro de un medallón blanco */}
+        <div className="absolute left-1/2 top-1/2 aspect-square w-[21.5%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-white shadow-[0_14px_30px_-16px_rgba(4,27,60,0.55)] ring-1 ring-gold/50">
+          <Image src={siteConfig.logo.src} alt="" fill sizes="170px" className="object-contain p-[7%]" />
+        </div>
+
+        <ul data-hero-tiles className="absolute inset-0">
+          {tiles.map(({ id, tone, Art }, i) => {
             const service = services.find((s) => s.id === id)!;
             const dark = tone === "dark";
+            const angle = ((-90 + 60 * i) * Math.PI) / 180; // empieza arriba y sigue en el sentido del reloj
             return (
-              <li key={id} className="relative hover:z-20 focus-within:z-20">
+              <li
+                key={id}
+                style={{ left: `${50 + ORBIT * Math.cos(angle)}%`, top: `${50 + ORBIT * Math.sin(angle)}%` }}
+                className="absolute w-[17%] -translate-x-1/2 -translate-y-1/2 hover:z-20 focus-within:z-20"
+              >
                 <Link
                   href={servicePath(locale, id)}
                   title={service.name[locale]}
                   className={cn(
-                    "group flex h-full flex-col rounded-2xl border p-2 shadow-[0_6px_16px_-10px_rgba(4,27,60,0.5)] transition-all duration-300 ease-out will-change-transform",
-                    "hover:-translate-y-2 hover:scale-[1.12] hover:rotate-[1.5deg] hover:border-gold hover:shadow-[0_28px_44px_-18px_rgba(4,27,60,0.65)]",
-                    "focus-visible:-translate-y-2 focus-visible:scale-[1.12] focus-visible:rotate-[1.5deg] focus-visible:border-gold focus-visible:shadow-[0_28px_44px_-18px_rgba(4,27,60,0.65)]",
+                    "group flex aspect-[1/1.06] w-full flex-col items-center justify-center rounded-2xl border p-[6%] shadow-[0_6px_16px_-10px_rgba(4,27,60,0.5)] transition-all duration-300 ease-out will-change-transform",
+                    "hover:-translate-y-2 hover:scale-[1.15] hover:rotate-[2deg] hover:border-gold hover:shadow-[0_28px_44px_-18px_rgba(4,27,60,0.65)]",
+                    "focus-visible:-translate-y-2 focus-visible:scale-[1.15] focus-visible:rotate-[2deg] focus-visible:border-gold focus-visible:shadow-[0_28px_44px_-18px_rgba(4,27,60,0.65)]",
                     dark ? "border-navy bg-navy" : "border-line bg-white",
                   )}
                 >
-                  <span className="block transition-transform duration-300 ease-out group-hover:scale-105 group-focus-visible:scale-105">
+                  <span className="block w-full transition-transform duration-300 ease-out group-hover:scale-105 group-focus-visible:scale-105">
                     <Art />
                   </span>
                   <span
                     className={cn(
-                      "mt-1 flex min-h-[2.4em] items-center justify-center px-1 pb-1 text-center text-[11px] font-semibold leading-tight max-xl:sr-only xl:text-xs",
+                      "mt-1 block text-center text-[10.5px] font-semibold leading-tight max-xl:sr-only",
                       dark ? "text-white" : "text-navy",
                     )}
                   >
