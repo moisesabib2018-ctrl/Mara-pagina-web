@@ -1,18 +1,11 @@
 import { siteConfig, type Locale } from "@/config/site";
 import { services } from "@/content/services";
 import { getDictionary } from "@/content/ui";
-import { getChannels, type Channel } from "@/lib/contact";
+import { getChannels } from "@/lib/contact";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Container } from "@/components/ui/Container";
-import { Instagram, Mail, Message, Phone } from "@/components/ui/Icons";
+import { channelIcon } from "@/components/ui/channel-icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-
-const channelIcon: Record<Channel["key"], React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
-  whatsapp: Message,
-  instagram: Instagram,
-  email: Mail,
-  phone: Phone,
-};
 
 export function Contact({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);

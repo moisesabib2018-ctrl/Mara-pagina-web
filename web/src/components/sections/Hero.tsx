@@ -1,16 +1,21 @@
 import Link from "next/link";
-import { type Locale } from "@/config/site";
-import { services } from "@/content/services";
+import Image from "next/image";
+import { siteConfig, type Locale } from "@/config/site";
 import { getDictionary } from "@/content/ui";
-import { homePath, servicePath } from "@/lib/routes";
+import { getChannels } from "@/lib/contact";
+import { homePath } from "@/lib/routes";
+import { Logo } from "@/components/layout/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { ArcMotif } from "@/components/ui/ArcMotif";
 import { Container } from "@/components/ui/Container";
-import { ArrowRight } from "@/components/ui/Icons";
+import { channelIcon } from "@/components/ui/channel-icons";
+import { ArrowRight, Check } from "@/components/ui/Icons";
 
 export function Hero({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const { hero } = dict;
+  const { name, photo } = siteConfig.advisor;
+  const channels = getChannels(locale);
   return (
     <section className="relative overflow-hidden bg-ivory">
       <ArcMotif className="absolute -right-60 -top-44 w-[460px] opacity-25 lg:-right-56 lg:top-1/2 lg:w-[860px] lg:-translate-y-1/2 lg:opacity-100" />
@@ -41,7 +46,7 @@ export function Hero({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        {/* Tarjeta de consulta: punto focal y acceso directo a cada servicio */}
+        {/* Tarjeta de la asesora: identidad, cómo es la consulta y canales directos (sin repetir los servicios) */}
         <div className="rise relative lg:ml-auto lg:w-full lg:max-w-md" style={{ animationDelay: "200ms" }}>
           <div
             className="absolute -right-2 -top-6 z-10 flex size-[5.25rem] flex-col items-center justify-center rounded-full bg-gold text-navy shadow-lg ring-4 ring-ivory sm:-right-4"
@@ -52,28 +57,63 @@ export function Hero({ locale }: { locale: Locale }) {
           </div>
 
           <div className="overflow-hidden rounded-2xl bg-navy text-white shadow-[0_32px_64px_-24px_rgba(4,27,60,0.55)]">
-            <div className="border-b border-white/10 px-7 pb-5 pt-7">
-              <h2 className="pr-16 font-serif text-2xl leading-snug">{hero.cardTitle}</h2>
-              <p className="mt-1.5 text-sm text-white/65">{hero.cardText}</p>
+            <div className="flex items-center gap-4 border-b border-white/10 p-7 pr-24">
+              <div className="shrink-0 overflow-hidden rounded-xl bg-white p-1.5">
+                {photo ? (
+                  <Image src={photo.src} width={64} height={64} alt={name ?? ""} className="size-16 rounded-lg object-cover" />
+                ) : (
+                  <Logo size={64} alt="" />
+                )}
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-light">{hero.cardLabel}</p>
+                <p translate="no" className="mt-1 font-serif text-xl leading-snug">
+                  {name ?? siteConfig.name}
+                </p>
+              </div>
             </div>
-            <ol>
-              {services.map((s, i) => (
-                <li key={s.id} className="border-b border-white/10">
-                  <Link href={servicePath(locale, s.id)} className="group flex min-h-14 items-center gap-4 px-7 py-3 transition-colors hover:bg-white/[0.06]">
-                    <span className="w-6 font-serif text-base text-gold-light" aria-hidden="true">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="flex-1 text-[0.95rem] font-medium">{s.name[locale]}</span>
-                    <ArrowRight width={18} height={18} className="text-white/35 transition-all group-hover:translate-x-0.5 group-hover:text-gold-light" />
-                  </Link>
-                </li>
-              ))}
-            </ol>
-            <div className="p-5">
-              <ButtonLink href={homePath(locale, "agenda")} size="lg" className="w-full">
-                {hero.cardCta}
-              </ButtonLink>
+
+            <div className="p-7">
+              <h2 className="font-serif text-2xl leading-snug">{hero.cardTitle}</h2>
+              <p className="mt-2 leading-relaxed text-white/70">{hero.cardText}</p>
+
+              <ul className="mt-6 space-y-3">
+                {hero.cardFacts.map((fact) => (
+                  <li key={fact} className="flex items-start gap-3 text-[0.95rem] text-white/90">
+                    <Check className="mt-0.5 shrink-0 text-gold-light" width={18} height={18} />
+                    {fact}
+                  </li>
+                ))}
+              </ul>
+
+              {channels.length > 0 ? (
+                <ul className="mt-6 flex flex-wrap gap-2 border-t border-white/10 pt-6">
+                  {channels.map((c) => {
+                    const Icon = channelIcon[c.key];
+                    return (
+                      <li key={c.key}>
+                        <a
+                          href={c.href}
+                          {...(c.href.startsWith("https://") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                          className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/25 px-4 text-sm font-medium transition-colors hover:border-gold-light hover:text-gold-light"
+                        >
+                          <Icon width={18} height={18} />
+                          {c.key === "email" || c.key === "phone" ? c.value : c.key === "whatsapp" ? dict.cta.whatsapp : dict.cta.instagram}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
             </div>
+
+            <Link
+              href={homePath(locale, "asesora")}
+              className="group flex min-h-14 items-center justify-between border-t border-white/10 px-7 text-sm font-semibold transition-colors hover:bg-white/[0.06]"
+            >
+              {hero.cardLink}
+              <ArrowRight width={18} height={18} className="text-gold-light transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </div>
       </Container>
