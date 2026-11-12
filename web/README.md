@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Blanchard Group LLC — sitio web
 
-## Getting Started
+Next.js 16 (App Router) · TypeScript · Tailwind CSS 4. Decisiones de arquitectura, identidad visual y reglas del proyecto: [`../CLAUDE.md`](../CLAUDE.md).
 
-First, run the development server:
+## Ejecutar en tu computadora
 
+### 1. Instalar una sola vez
+- **Node.js 22** (mínimo 20.9): <https://nodejs.org> (descarga la versión LTS).
+- **Git**: <https://git-scm.com/downloads> (en Mac se instala al ejecutar `git --version` por primera vez).
+
+Comprueba:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+node -v && git --version
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Descargar el proyecto
+```bash
+git clone https://github.com/moisesabib2018-ctrl/Mara-pagina-web.git
+```
+```bash
+cd Mara-pagina-web
+```
+```bash
+git checkout claude/relaxed-maxwell-h1phb8
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Instalar y abrir
+```bash
+cd web
+```
+```bash
+npm install
+```
+```bash
+npm run dev
+```
+Abre <http://localhost:3000> (redirige a `/es`; el inglés está en `/en`). Los cambios en el código se ven al guardar, sin reiniciar.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Actualizar cuando haya cambios nuevos
+Desde la carpeta `Mara-pagina-web`:
+```bash
+git pull
+```
+Si `package.json` cambió, vuelve a ejecutar `npm install` dentro de `web/`.
 
-## Learn More
+## Activar WhatsApp, calendario, Instagram y chatbot
+Copia la plantilla y completa solo lo que tengas (lo vacío no se muestra):
+```bash
+cp .env.example .env.local
+```
+Edita `.env.local` y reinicia `npm run dev`. Qué hace cada variable: comentarios en `.env.example`. **Nunca subas `.env.local` a GitHub** (ya está ignorado).
 
-To learn more about Next.js, take a look at the following resources:
+## Comandos
+| Comando | Para qué |
+|---|---|
+| `npm run dev` | Servidor de desarrollo con recarga automática |
+| `npm run build` · `npm run start` | Compilar y servir la versión de producción |
+| `npm run lint` | Revisar el código |
+| `npm run typecheck` | Revisar los tipos |
+| `npm test` | Pruebas automáticas |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Problemas frecuentes
+- **`command not found: node`**: instala Node.js y abre una terminal nueva.
+- **El puerto 3000 está ocupado**: `npm run dev -- -p 3001` y abre <http://localhost:3001>.
+- **Se ve la página sin estilos o con errores raros tras actualizar**: detén el servidor (Ctrl+C), borra la caché con `rm -rf .next` y vuelve a `npm run dev`.
+- **Chrome traduce la página**: el sitio ya es bilingüe; si aparece el aviso de traducir, ignóralo.
