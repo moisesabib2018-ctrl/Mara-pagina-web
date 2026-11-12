@@ -5,11 +5,15 @@
  */
 const blank = (v: string | undefined) => (v && v.trim() !== "" ? v.trim() : null);
 
-/** WhatsApp: solo dígitos con código de país (8 a 15 dígitos). Acepta "+1 (555) 123-4567". */
+/**
+ * WhatsApp: solo dígitos con código de país (8 a 15). Acepta "+1 (555) 123-4567".
+ * Un número de exactamente 10 dígitos se toma como de EE. UU. y se le antepone el 1 (wa.me exige el código de país).
+ */
 export function cleanWhatsapp(raw: string | undefined): string | null {
   const v = blank(raw);
   if (!v) return null;
   const digits = v.replace(/\D/g, "");
+  if (digits.length === 10) return `1${digits}`;
   return digits.length >= 8 && digits.length <= 15 ? digits : null;
 }
 
