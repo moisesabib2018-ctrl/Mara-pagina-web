@@ -10,7 +10,7 @@ export function AdvisorIntro({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const { name, photo, bio } = siteConfig.advisor;
   return (
-    <section id="asesora" aria-labelledby="asesora-title" className="bg-mist-100 py-16 sm:py-24">
+    <section id="asesora" aria-labelledby="asesora-title" className="bg-ivory-200 py-16 sm:py-24">
       <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <div className="mx-auto w-full max-w-sm rounded-lg border border-line bg-white p-8">
           {photo ? (

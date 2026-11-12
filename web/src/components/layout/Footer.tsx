@@ -19,7 +19,7 @@ export function Footer({ locale }: { locale: Locale }) {
           <div className="inline-block rounded-lg bg-white p-2">
             <Logo size={88} />
           </div>
-          <p className="mt-4 font-serif text-lg">{siteConfig.name}</p>
+          <p translate="no" className="mt-4 font-serif text-lg">{siteConfig.name}</p>
         </div>
 
         <nav aria-label={dict.footer.services}>

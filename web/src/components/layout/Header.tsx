@@ -24,7 +24,7 @@ export function Header({ locale }: { locale: Locale }) {
       <Container className="relative flex h-[4.5rem] items-center justify-between gap-4">
         <Link href={homePath(locale)} aria-label={dict.a11y.home} className="flex items-center gap-3">
           <Logo size={56} priority />
-          <span className="hidden font-serif text-lg font-medium tracking-wide text-navy sm:inline">{siteConfig.name}</span>
+          <span translate="no" className="hidden font-serif text-lg font-medium tracking-wide text-navy sm:inline">{siteConfig.name}</span>
         </Link>
 
         <nav aria-label="Principal" className="hidden items-center gap-7 lg:flex">
