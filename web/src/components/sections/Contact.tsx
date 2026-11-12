@@ -1,9 +1,8 @@
-import { siteConfig, type Locale } from "@/config/site";
+import { type Locale } from "@/config/site";
 import { services } from "@/content/services";
 import { getDictionary } from "@/content/ui";
 import { getChannels } from "@/lib/contact";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { RequestBuilder } from "@/components/forms/RequestBuilder";
 import { Container } from "@/components/ui/Container";
 import { channelIcon } from "@/components/ui/channel-icons";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -15,7 +14,7 @@ export function Contact({ locale }: { locale: Locale }) {
     <section id="contacto" aria-labelledby="contacto-title" className="view bg-ivory py-16 sm:py-24">
       <Container className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <div>
-          <SectionHeading id="contacto-title" eyebrow={dict.contact.eyebrow} title={dict.contact.title} text={siteConfig.contactForm.enabled ? dict.contact.text : dict.contact.builder.text} />
+          <SectionHeading id="contacto-title" eyebrow={dict.contact.eyebrow} title={dict.contact.title} text={dict.contact.text} />
           {channels.length > 0 ? (
             <div className="mt-8">
               <p className="text-sm font-semibold text-navy">{dict.contact.channels}</p>
@@ -40,23 +39,7 @@ export function Contact({ locale }: { locale: Locale }) {
           ) : null}
         </div>
         <div className="rounded-2xl border border-line bg-white p-6 shadow-[0_22px_44px_-30px_rgba(4,27,60,0.35)] sm:p-8">
-          {/* Con proveedor de correo conectado: formulario. Mientras tanto: generador de solicitud (funciona hoy, sin enviar nada). */}
-          {siteConfig.contactForm.enabled ? (
-            <ContactForm
-              enabled
-              locale={locale}
-              labels={dict.contact}
-              services={services.map((s) => ({ id: s.id, name: s.name[locale] }))}
-            />
-          ) : (
-            <RequestBuilder
-              locale={locale}
-              labels={dict.contact.builder}
-              privacy={dict.contact.privacy}
-              services={services.map((s) => ({ id: s.id, name: s.name[locale] }))}
-              whatsapp={siteConfig.contact.whatsapp}
-            />
-          )}
+          <ContactForm locale={locale} labels={dict.contact} services={services.map((s) => ({ id: s.id, name: s.name[locale] }))} />
         </div>
       </Container>
     </section>

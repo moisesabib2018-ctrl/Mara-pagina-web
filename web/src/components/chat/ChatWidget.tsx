@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/config/site";
 import type { Dictionary } from "@/content/ui";
+import { cn } from "@/lib/cn";
 import { Chat, Close } from "@/components/ui/Icons";
 
 type Message = { role: "user" | "assistant"; content: string };
@@ -15,10 +16,13 @@ export function ChatWidget({
   locale,
   labels,
   links,
+  stackedOnWhatsapp,
 }: {
   locale: Locale;
   labels: Dictionary["chat"];
   links: { services: string; booking: string; whatsapp: string | null };
+  /** true si hay un botón de WhatsApp en la esquina: el chat se coloca encima. */
+  stackedOnWhatsapp?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   // Estado real del servidor (se consulta una vez al abrir): "checking" | "on" | "off"
@@ -80,7 +84,10 @@ export function ChatWidget({
         aria-expanded={open}
         aria-controls="chat-panel"
         aria-label={open ? labels.close : labels.open}
-        className="fixed bottom-24 right-3 z-40 flex size-12 md:size-14 items-center justify-center rounded-full bg-gold text-navy shadow-lg transition-colors hover:bg-gold-light md:bottom-24 md:right-6"
+        className={cn(
+          "fixed right-3 z-40 flex size-12 items-center justify-center rounded-full bg-gold text-navy shadow-lg transition-colors hover:bg-gold-light md:bottom-24 md:right-6 md:size-14",
+          stackedOnWhatsapp ? "bottom-[9.5rem]" : "bottom-24",
+        )}
       >
         {open ? <Close width={24} height={24} /> : <Chat width={24} height={24} />}
       </button>
@@ -93,7 +100,10 @@ export function ChatWidget({
           role="dialog"
           aria-label={labels.title}
           onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
-          className="fixed inset-x-3 bottom-40 z-40 flex max-h-[calc(100dvh-11rem)] flex-col overflow-hidden rounded-lg border border-line bg-white shadow-2xl outline-none sm:inset-x-auto sm:right-6 sm:w-[24rem]"
+          className={cn(
+            "fixed inset-x-3 z-40 flex flex-col overflow-hidden rounded-lg border border-line bg-white shadow-2xl outline-none sm:inset-x-auto sm:right-6 sm:w-[24rem]",
+            stackedOnWhatsapp ? "bottom-[13rem] max-h-[calc(100dvh-14rem)]" : "bottom-40 max-h-[calc(100dvh-11rem)]",
+          )}
         >
           <div className="bg-navy px-5 py-4 text-white">
             <p className="font-serif text-lg">{labels.title}</p>

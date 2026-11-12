@@ -71,8 +71,6 @@ export const siteConfig = {
     /** Horario de EJEMPLO para la vista previa (el real lo definirá la asesora en Google Calendar). */
     previewHours: { weekdays: [1, 2, 3, 4, 5], firstHour: 9, lastHour: 16 },
   },
-  /** El formulario solo se activa cuando /api/contact esté conectado a un proveedor de email. */
-  contactForm: { enabled: false },
 } as const;
 
 export type Locale = (typeof siteConfig.locales)[number];

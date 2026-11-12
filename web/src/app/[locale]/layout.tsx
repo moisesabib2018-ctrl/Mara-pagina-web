@@ -72,6 +72,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           <ChatWidget
             locale={locale}
             labels={dict.chat}
+            stackedOnWhatsapp={whatsappHref(locale) !== null}
             links={{ services: homePath(locale, "servicios"), booking: homePath(locale, "agenda"), whatsapp: whatsappHref(locale) }}
           />
         </aside>
