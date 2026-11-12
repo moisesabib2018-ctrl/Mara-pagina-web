@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import type Anthropic from "@anthropic-ai/sdk";
-import { DEFAULT_MODEL, generateReply, normalizeMessages, type ChatClient } from "./respond";
+import { DEFAULT_MODEL, anthropicBackend, generateReply, normalizeMessages, type ChatClient } from "./respond";
 
 const fakeMessage = (over: Partial<Anthropic.Message>): Anthropic.Message =>
   ({ id: "m", type: "message", role: "assistant", model: "x", stop_reason: "end_turn", stop_sequence: null, content: [], usage: {}, ...over }) as unknown as Anthropic.Message;
@@ -35,7 +35,7 @@ describe("normalizeMessages", () => {
 describe("generateReply", () => {
   it("envía el prompt aprobado, el modelo por defecto y devuelve el texto", async () => {
     const { client, create } = clientReturning(fakeMessage({ content: [{ type: "text", text: "Dura 45 minutos." } as never] }));
-    const reply = await generateReply({ locale: "es", messages: [{ role: "user", content: "¿cuánto dura?" }] }, client);
+    const reply = await generateReply({ locale: "es", messages: [{ role: "user", content: "¿cuánto dura?" }] }, anthropicBackend(client));
     expect(reply).toBe("Dura 45 minutos.");
     const params = create.mock.calls[0][0];
     expect(params.model).toBe(DEFAULT_MODEL);
@@ -45,21 +45,21 @@ describe("generateReply", () => {
   });
   it("respeta el modelo configurado", async () => {
     const { client, create } = clientReturning(fakeMessage({ content: [{ type: "text", text: "ok" } as never] }));
-    await generateReply({ locale: "en", messages: [{ role: "user", content: "hi" }] }, client, "claude-haiku-5-5");
+    await generateReply({ locale: "en", messages: [{ role: "user", content: "hi" }] }, anthropicBackend(client, "claude-haiku-5-5"));
     expect(create.mock.calls[0][0].model).toBe("claude-haiku-5-5");
   });
   it("ante un rechazo del modelo responde con un mensaje amable y no vacío", async () => {
     const { client } = clientReturning(fakeMessage({ stop_reason: "refusal" }));
-    const reply = await generateReply({ locale: "es", messages: [{ role: "user", content: "hola" }] }, client);
+    const reply = await generateReply({ locale: "es", messages: [{ role: "user", content: "hola" }] }, anthropicBackend(client));
     expect(reply).toContain("agenda una consulta");
   });
   it("sin texto devuelve el mensaje de respaldo", async () => {
     const { client } = clientReturning(fakeMessage({ content: [] }));
-    expect(await generateReply({ locale: "en", messages: [{ role: "user", content: "hi" }] }, client)).toContain("book a consultation");
+    expect(await generateReply({ locale: "en", messages: [{ role: "user", content: "hi" }] }, anthropicBackend(client))).toContain("book a consultation");
   });
   it("no llama a la API si no hay mensaje del usuario", async () => {
     const { client, create } = clientReturning(fakeMessage({}));
-    await generateReply({ locale: "es", messages: [{ role: "assistant", content: "hola" }] }, client);
+    await generateReply({ locale: "es", messages: [{ role: "assistant", content: "hola" }] }, anthropicBackend(client));
     expect(create).not.toHaveBeenCalled();
   });
 });

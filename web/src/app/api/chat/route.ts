@@ -1,10 +1,11 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { z } from "zod";
 import { siteConfig } from "@/config/site";
-import { getServerEnv, isChatEnabled } from "@/config/env";
+import { chatProvider, getServerEnv } from "@/config/env";
 import { containsSensitiveData, sensitiveDataReply } from "@/lib/chat/guardrails";
 import { createRateLimiter } from "@/lib/chat/rate-limit";
-import { DEFAULT_MODEL, generateReply } from "@/lib/chat/respond";
+import { geminiBackend } from "@/lib/chat/gemini";
+import { DEFAULT_MODEL, anthropicBackend, generateReply, type ChatBackend } from "@/lib/chat/respond";
 
 const schema = z.object({
   locale: z.enum(siteConfig.locales),
@@ -24,7 +25,7 @@ function visitorKey(request: Request) {
 
 /** Estado en tiempo de ejecución: el widget lo consulta al abrirse (la clave puede agregarse sin recompilar). */
 export async function GET() {
-  return Response.json({ enabled: isChatEnabled() }, { headers: { "Cache-Control": "no-store" } });
+  return Response.json({ enabled: chatProvider() !== null }, { headers: { "Cache-Control": "no-store" } });
 }
 
 export async function POST(request: Request) {
@@ -41,7 +42,8 @@ export async function POST(request: Request) {
   }
 
   // Sin clave (o apagado) no se inventan respuestas.
-  if (!isChatEnabled()) return Response.json({ error: "not_configured" }, { status: 503 });
+  const provider = chatProvider();
+  if (!provider) return Response.json({ error: "not_configured" }, { status: 503 });
 
   const env = getServerEnv();
   dailyLimiter ??= createRateLimiter({ limit: env.CHAT_DAILY_LIMIT ?? 300, windowMs: 24 * 60 * 60 * 1000, maxKeys: 1 });
@@ -50,12 +52,15 @@ export async function POST(request: Request) {
   }
 
   try {
-    const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 30_000 });
-    const reply = await generateReply({ locale, messages }, client, env.ANTHROPIC_MODEL?.trim() || DEFAULT_MODEL);
+    const backend: ChatBackend =
+      provider === "gemini"
+        ? geminiBackend({ apiKey: (env.GEMINI_API_KEY || env.GOOGLE_API_KEY)!.trim(), model: env.GEMINI_MODEL!, baseUrl: env.GEMINI_BASE_URL?.trim() || undefined })
+        : anthropicBackend(new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, maxRetries: 1, timeout: 30_000 }), env.ANTHROPIC_MODEL?.trim() || DEFAULT_MODEL);
+    const reply = await generateReply({ locale, messages }, backend);
     return Response.json({ reply });
   } catch (error) {
     // No se filtran detalles al navegador.
-    console.error("chat error", error instanceof Anthropic.APIError ? `API ${error.status}` : "unexpected");
+    console.error("chat error", provider, error instanceof Anthropic.APIError ? `API ${error.status}` : error instanceof Error ? error.message.slice(0, 40) : "unexpected");
     return Response.json({ error: "upstream" }, { status: 502 });
   }
 }
