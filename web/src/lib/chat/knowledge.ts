@@ -10,7 +10,8 @@ export function buildKnowledge(locale: Locale): string {
     .map((s) => `- ${s.name[locale]}: ${s.lead[locale]}${s.note ? ` (${s.note[locale]})` : ""}`)
     .join("\n");
   const faqLines = dict.faq.items.map((i) => `Q: ${i.q}\nA: ${i.a}`).join("\n\n");
-  return `${siteConfig.name}\nServices:\n${serviceLines}\n\nFAQ:\n${faqLines}`;
+  const about = `Location: ${siteConfig.location.city}, ${siteConfig.location.region} (in person). Languages: Spanish and English. Advisor: ${siteConfig.advisor.name ?? "the advisor"}.`;
+  return `${siteConfig.name}\n${about}\nServices:\n${serviceLines}\n\nFAQ:\n${faqLines}`;
 }
 
 /** Prompt de sistema para la integración futura con la API de IA. */

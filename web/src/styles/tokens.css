@@ -18,6 +18,9 @@
   --color-gold-tint: #f4ead6;
 
   /* Grises claros */
+  /* Fondos cálidos (marfil): equilibran el azul y hacen resaltar el dorado */
+  --color-ivory: #fbf8f2;
+  --color-ivory-200: #f3eee4;
   --color-mist-50: #f7f8fa;
   --color-mist-100: #eff1f5;
   --color-mist-200: #e1e5eb;

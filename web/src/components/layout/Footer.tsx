@@ -9,7 +9,7 @@ import { Logo } from "./Logo";
 
 export function Footer({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
-  const channels = getChannels();
+  const channels = getChannels(locale);
   const linkClass = "inline-flex min-h-9 items-center text-sm text-white/75 transition-colors hover:text-white";
 
   return (
@@ -19,7 +19,8 @@ export function Footer({ locale }: { locale: Locale }) {
           <div className="inline-block rounded-lg bg-white p-2">
             <Logo size={88} />
           </div>
-          <p className="mt-4 font-serif text-lg">{siteConfig.name}</p>
+          <p translate="no" className="mt-4 font-serif text-lg">{siteConfig.name}</p>
+          <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/70">{dict.footer.tagline}</p>
         </div>
 
         <nav aria-label={dict.footer.services}>

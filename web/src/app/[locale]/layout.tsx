@@ -30,6 +30,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
     description: dict.meta.description,
     icons: { icon: siteConfig.logo.src },
+    // El sitio ya es bilingüe: evita que el traductor automático altere la marca y el contenido.
+    other: { google: "notranslate" },
     // Sitio no publicado: sin indexación hasta el lanzamiento.
     robots: siteConfig.indexable ? undefined : { index: false, follow: false },
     // hreflang y URLs absolutas solo cuando exista dominio confirmado.
@@ -62,14 +64,15 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           {children}
         </main>
         <Footer locale={locale} />
-        <MobileCTABar locale={locale} />
-        <WhatsAppFloat locale={locale} />
-        <ChatWidget
-          locale={locale}
-          enabled={siteConfig.chat.enabled}
-          labels={dict.chat}
-          links={{ services: homePath(locale, "servicios"), booking: homePath(locale, "agenda"), whatsapp: whatsappHref() }}
-        />
+        <aside aria-label={dict.a11y.quickActions}>
+          <MobileCTABar locale={locale} />
+          <WhatsAppFloat locale={locale} />
+          <ChatWidget
+            locale={locale}
+            labels={dict.chat}
+            links={{ services: homePath(locale, "servicios"), booking: homePath(locale, "agenda"), whatsapp: whatsappHref(locale) }}
+          />
+        </aside>
       </body>
     </html>
   );

@@ -15,7 +15,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function Booking({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const target = getBookingTarget(siteConfig.booking.url);
-  const channels = getChannels().filter((c) => c.key === "whatsapp" || c.key === "email" || c.key === "phone");
+  const channels = getChannels(locale).filter((c) => c.key === "whatsapp" || c.key === "email" || c.key === "phone");
 
   return (
     <section id="agenda" aria-labelledby="agenda-title" className="bg-deep py-16 sm:py-24">

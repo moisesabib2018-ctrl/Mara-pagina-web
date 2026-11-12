@@ -6,12 +6,13 @@ import { Container } from "@/components/ui/Container";
 export function TrustStrip({ locale }: { locale: Locale }) {
   const items = getDictionary(locale).trust;
   return (
-    <section aria-label="Resumen" className="border-b border-line bg-white">
+    <section aria-label="Resumen" className="border-y border-line bg-white">
       <Container>
-        <ul className="grid divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <ul className="grid grid-cols-3 divide-x divide-line">
           {items.map((t) => (
-            <li key={t} className="flex min-h-16 items-center justify-center px-4 py-4 text-center font-serif text-base text-navy sm:text-lg">
-              {t}
+            <li key={t.label} className="px-2 py-6 text-center sm:py-8">
+              <p className="font-serif text-2xl text-navy sm:text-4xl">{t.value}</p>
+              <p className="mt-1 text-xs leading-snug text-ink-soft sm:text-sm">{t.label}</p>
             </li>
           ))}
         </ul>

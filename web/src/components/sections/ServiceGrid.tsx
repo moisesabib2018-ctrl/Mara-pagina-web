@@ -10,7 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 export function ServiceGrid({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   return (
-    <section id="servicios" aria-labelledby="servicios-title" className="bg-mist-50 py-16 sm:py-24">
+    <section id="servicios" aria-labelledby="servicios-title" className="bg-ivory py-16 sm:py-24">
       <Container>
         <SectionHeading id="servicios-title" eyebrow={dict.services.eyebrow} title={dict.services.title} text={dict.services.text} />
         <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -18,7 +18,7 @@ export function ServiceGrid({ locale }: { locale: Locale }) {
             <li key={s.id}>
               <Link
                 href={servicePath(locale, s.id)}
-                className="group flex h-full flex-col border border-line border-t-2 border-t-gold bg-white p-7 transition-colors hover:border-navy/40 hover:border-t-gold"
+                className="group flex h-full flex-col rounded-xl border border-line border-t-[3px] border-t-gold bg-white p-7 transition-all duration-200 hover:-translate-y-1 hover:border-navy/30 hover:border-t-gold hover:shadow-[0_18px_40px_-22px_rgba(4,27,60,0.35)]"
               >
                 <span className="font-serif text-3xl text-gold" aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}
