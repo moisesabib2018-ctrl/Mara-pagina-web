@@ -47,7 +47,7 @@ export const siteConfig = {
     } | null,
   },
   advisor: {
-    name: "Marianna Blanchard Hernandez" as string | null,
+    name: "Mariamna Blanchard Hernandez" as string | null,
     photo: { src: "/images/advisor-portrait.jpg", width: 1600, height: 1066 } as { src: string; width: number; height: number } | null,
     bio: null as { es: string; en: string } | null, // biografía y credenciales: pendientes
   },
