@@ -54,10 +54,22 @@ export const siteConfig = {
   locales: ["es", "en"] as const,
   defaultLocale: "es" as const,
   booking: {
+    /**
+     * "preview" = el calendario es solo una VISTA PREVIA del diseño: horarios de ejemplo, no crea citas ni envía datos
+     * y muestra un aviso visible. Pasará a "live" cuando se conecte la API de Google Calendar (pendiente).
+     */
+    mode: "preview" as "preview" | "live",
     consultationMinutes: 45,
-    // Los 15 min de descanso se configuran en Google Calendar y nunca se muestran.
-    /** Enlace público de la página de citas de Google Calendar. Pendiente. */
-    url: publicEnv.bookingUrl, // NEXT_PUBLIC_BOOKING_URL
+    /** Descanso entre consultas: INTERNO, nunca se muestra al cliente (solo separa el inicio de cada horario). */
+    breakMinutes: 15,
+    /** Los horarios se muestran en la hora de la oficina. */
+    timeZone: "America/Chicago",
+    /** Hasta cuántos meses adelante se puede reservar. */
+    maxAdvanceMonths: 3,
+    /** Aviso mínimo antes de una cita (minutos). */
+    minNoticeMinutes: 120,
+    /** Horario de EJEMPLO para la vista previa (el real lo definirá la asesora en Google Calendar). */
+    previewHours: { weekdays: [1, 2, 3, 4, 5], firstHour: 9, lastHour: 16 },
   },
   /** El formulario solo se activa cuando /api/contact esté conectado a un proveedor de email. */
   contactForm: { enabled: false },

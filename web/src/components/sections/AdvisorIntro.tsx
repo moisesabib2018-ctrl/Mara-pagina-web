@@ -17,16 +17,16 @@ export function AdvisorIntro({ locale }: { locale: Locale }) {
   const { name, photo, bio } = siteConfig.advisor;
   return (
     <section id="asesora" aria-labelledby="asesora-title" className="view border-b border-line bg-ivory-200 py-16 sm:py-24">
-      <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
+      <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16 xl:gap-20">
         {photo ? (
           // Marco blanco suave; el recorte conserva el aspecto de la foto (sin deformar) y deja ver el rostro completo.
-          <div className="mx-auto w-full max-w-md rounded-[1.75rem] bg-white p-2.5 shadow-[0_28px_60px_-34px_rgba(4,27,60,0.45)] lg:max-w-none">
+          <div className="mx-auto w-full max-w-md rounded-[1.75rem] bg-white p-2.5 shadow-[0_28px_60px_-34px_rgba(4,27,60,0.45)] lg:max-w-[calc(min(46rem,100svh-13rem)*0.8)]">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-ivory-200">
               <Image
                 src={photo.src}
                 width={photo.width}
                 height={photo.height}
-                sizes="(min-width: 1024px) 480px, (min-width: 448px) 448px, calc(100vw - 3.5rem)"
+                sizes="(min-width: 1024px) 560px, (min-width: 448px) 448px, calc(100vw - 3.5rem)"
                 alt={`${name ?? siteConfig.name}${dict.advisor.photoAlt}`}
                 quality={90}
                 className="size-full object-cover object-[27%_12%]"

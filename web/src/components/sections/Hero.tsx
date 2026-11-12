@@ -15,19 +15,19 @@ export function Hero({ locale }: { locale: Locale }) {
     <section className="view relative overflow-hidden bg-ivory">
       <ArcMotif className="absolute -right-72 -top-60 w-[480px] opacity-20 sm:-right-40 sm:-top-40 sm:w-[560px] sm:opacity-30 lg:hidden" />
 
-      <Container className="relative grid gap-12 py-14 sm:py-20 lg:grid-cols-[1fr_420px] lg:items-center lg:gap-10 lg:py-6 xl:grid-cols-[1fr_500px]">
+      <Container className="relative grid gap-12 py-14 sm:py-20 lg:grid-cols-[1fr_420px] lg:items-center lg:gap-10 lg:py-6 xl:grid-cols-[1fr_500px] 2xl:grid-cols-[1fr_600px]">
         <div className="max-w-3xl">
           <p className="inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-navy">
             <span className="size-1.5 rounded-full bg-gold" aria-hidden="true" />
             {hero.eyebrow}
           </p>
-          <h1 className="mt-6 text-balance font-serif text-[2.6rem] leading-[1.04] tracking-tight text-navy sm:text-5xl lg:text-[2.7rem] xl:text-[3rem]">
+          <h1 className="mt-6 text-balance font-serif text-[2.6rem] leading-[1.04] tracking-tight text-navy sm:text-5xl lg:text-[2.7rem] xl:text-[3rem] 2xl:text-[3.6rem]">
             {hero.titleLead}{" "}
             <em className="bg-[linear-gradient(transparent_64%,rgb(183_139_64/0.38)_64%)] pr-1 italic [box-decoration-break:clone] sm:whitespace-nowrap">
               {hero.titleAccent}
             </em>
           </h1>
-          <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl">{hero.text}</p>
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl 2xl:max-w-2xl 2xl:text-2xl">{hero.text}</p>
         </div>
 
         <HeroVisual locale={locale} />

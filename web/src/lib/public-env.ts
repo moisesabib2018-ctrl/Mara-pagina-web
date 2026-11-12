@@ -41,6 +41,5 @@ export const publicEnv = {
   instagram: cleanHttpsUrl(process.env.NEXT_PUBLIC_INSTAGRAM_URL),
   email: cleanEmail(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
   phone: cleanPhone(process.env.NEXT_PUBLIC_PHONE),
-  bookingUrl: cleanHttpsUrl(process.env.NEXT_PUBLIC_BOOKING_URL),
   indexable: process.env.NEXT_PUBLIC_INDEXABLE === "true",
 };
