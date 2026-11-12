@@ -16,6 +16,8 @@ const serverSchema = z.object({
   CONTACT_EMAIL_API_KEY: z.string().optional(),
   CONTACT_EMAIL_TO: z.string().optional(),
   CONTACT_EMAIL_FROM: z.string().optional(),
+  /** Opcional: dirección de la API de correo (por defecto Resend). Útil para pruebas con un servidor falso. */
+  CONTACT_EMAIL_API_URL: z.string().optional(),
 });
 
 export function getServerEnv() {
@@ -25,4 +27,10 @@ export function getServerEnv() {
 /** El chatbot se activa solo con clave de API y sin CHAT_ENABLED=false. */
 export function isChatEnabled(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY?.trim()) && process.env.CHAT_ENABLED !== "false";
+}
+
+/** El formulario de contacto envía correos solo si están las tres variables (clave, destinatario y remitente). */
+export function isContactConfigured(): boolean {
+  const ok = (v?: string) => Boolean(v?.trim());
+  return ok(process.env.CONTACT_EMAIL_API_KEY) && ok(process.env.CONTACT_EMAIL_TO) && ok(process.env.CONTACT_EMAIL_FROM);
 }
