@@ -60,7 +60,7 @@ export async function POST(request: Request) {
     return Response.json({ reply });
   } catch (error) {
     // No se filtran detalles al navegador.
-    console.error("chat error", provider, error instanceof Anthropic.APIError ? `API ${error.status}` : error instanceof Error ? error.message.slice(0, 40) : "unexpected");
+    console.error("chat error", provider, error instanceof Anthropic.APIError ? `API ${error.status}` : error instanceof Error ? error.message.slice(0, 300) : "unexpected");
     return Response.json({ error: "upstream" }, { status: 502 });
   }
 }

@@ -39,7 +39,17 @@ export function geminiBackend({
       }),
       signal: AbortSignal.timeout(timeoutMs),
     });
-    if (!res.ok) throw new Error(`gemini ${res.status}`);
+    if (!res.ok) {
+      // Motivo que da Google (p. ej. "model not found", "API key not valid"): va solo al registro del servidor, nunca al navegador.
+      let detail = "";
+      try {
+        detail = ((await res.json()) as { error?: { message?: string } }).error?.message ?? "";
+      } catch {
+        /* respuesta sin cuerpo JSON */
+      }
+      const message = `gemini ${res.status}${detail ? `: ${detail}` : ""}`;
+      throw new Error((apiKey ? message.split(apiKey).join("***") : message).slice(0, 300));
+    }
 
     const data = (await res.json()) as GeminiResponse;
     if (data.promptFeedback?.blockReason) return { text: "", refused: true };

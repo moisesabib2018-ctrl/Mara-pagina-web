@@ -35,6 +35,12 @@ describe("proveedor Google (Gemini)", () => {
     const r = await geminiBackend({ apiKey: "k", model: "m", fetchImpl: blockedOutput.fetchImpl })({ system: "s", messages: [{ role: "user", content: "x" }] });
     expect(r.refused).toBe(true);
   });
+  it("el error incluye el motivo de Google y nunca la clave", async () => {
+    const { fetchImpl } = make(() => new Response(JSON.stringify({ error: { message: "models/xyz is not found. key=SECRETKEY" } }), { status: 404 }));
+    const run = geminiBackend({ apiKey: "SECRETKEY", model: "xyz", fetchImpl })({ system: "s", messages: [{ role: "user", content: "x" }] });
+    await expect(run).rejects.toThrow(/gemini 404: models\/xyz is not found/);
+    await expect(run).rejects.not.toThrow(/SECRETKEY/);
+  });
   it("un error HTTP lanza (el servidor responde 502 sin filtrar detalles)", async () => {
     const { fetchImpl } = make(() => new Response("{}", { status: 429 }));
     await expect(geminiBackend({ apiKey: "k", model: "m", fetchImpl })({ system: "s", messages: [{ role: "user", content: "x" }] })).rejects.toThrow("gemini 429");

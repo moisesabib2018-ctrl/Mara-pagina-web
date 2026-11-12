@@ -1,6 +1,7 @@
 import type { Locale } from "@/config/site";
 import { siteConfig } from "@/config/site";
 import { isContactConfigured } from "@/config/env";
+import { chatKnowledge } from "@/content/chat-knowledge";
 import { services } from "@/content/services";
 import { getDictionary } from "@/content/ui";
 import { formatPhoneDisplay } from "@/lib/contact";
@@ -28,18 +29,43 @@ export function buildContactOptions(): string[] {
   return options;
 }
 
-/** Base de conocimiento APROBADA: solo contenido del sitio. Nada se inventa aquí. */
+const MAX_CUSTOM_CHARS = 40_000;
+
+/**
+ * Limpia el texto editable: quita comentarios <!-- --> y las líneas con [PENDIENTE] (tareas sin completar), colapsa
+ * líneas en blanco y limita el tamaño. Si queda vacío, no se agrega nada al asistente.
+ */
+export function cleanCustomKnowledge(raw: string): string {
+  const text = raw
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .split("\n")
+    .filter((line) => !line.includes("[PENDIENTE"))
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+  // Un título sin contenido debajo no aporta: se descartan los temas vacíos.
+  const sections = text.split(/\n(?=## )/).filter((s) => !s.startsWith("## ") || s.replace(/^## .*\n?/, "").trim() !== "");
+  return sections.join("\n").slice(0, MAX_CUSTOM_CHARS).trim();
+}
+
+/** Base de conocimiento APROBADA: solo contenido del sitio y del texto editable. Nada se inventa aquí. */
 export function buildKnowledge(locale: Locale): string {
   const dict = getDictionary(locale);
+  // Cada servicio con su descripción, para quién es, los pasos y qué tener a la mano (el mismo contenido de su página).
   const serviceLines = services
-    .map((s) => `- ${s.name[locale]}: ${s.lead[locale]}${s.note ? ` (${s.note[locale]})` : ""}`)
+    .map(
+      (s) =>
+        `- ${s.name[locale]}: ${s.lead[locale]}\n  For whom: ${s.forWhom[locale].join("; ")}.\n  Steps: ${s.steps[locale].map((st, i) => `${i + 1}) ${st.title}: ${st.text}`).join(" ")}\n  What to have on hand: ${s.bring[locale].join("; ")}.${s.note ? `\n  Note: ${s.note[locale]}` : ""}`,
+    )
     .join("\n");
   const faqLines = dict.faq.items.map((i) => `Q: ${i.q}\nA: ${i.a}`).join("\n\n");
   const about = `Location: ${siteConfig.location.city}, ${siteConfig.location.region} (in person). Languages: Spanish and English. Advisor: ${siteConfig.advisor.name ?? "the advisor"}. Prices are not published: the cost depends on each case.`;
   const contact = buildContactOptions()
     .map((o) => `- ${o}`)
     .join("\n");
-  return `${siteConfig.name}\n${about}\n\nWays to reach the advisor:\n${contact}\n\nServices:\n${serviceLines}\n\nFAQ:\n${faqLines}`;
+  const custom = cleanCustomKnowledge(chatKnowledge);
+  const extra = custom ? `\n\nADDITIONAL APPROVED KNOWLEDGE FROM THE ADVISOR (takes priority if it conflicts with the above):\n${custom}` : "";
+  return `${siteConfig.name}\n${about}\n\nWays to reach the advisor:\n${contact}\n\nServices:\n${serviceLines}\n\nFAQ:\n${faqLines}${extra}`;
 }
 
 /** Prompt de sistema del asistente. */
