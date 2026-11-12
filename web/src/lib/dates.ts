@@ -42,3 +42,18 @@ export function formatKeyDate(item: KeyDate, locale: Locale): string {
   const sameYear = item.start.slice(0, 4) === item.end.slice(0, 4);
   return `${fmt(item.start, locale, sameYear ? short : shortY)} – ${fmt(item.end, locale, shortY)}`;
 }
+
+/** "Ahora" en la zona de la oficina como "YYYY-MM-DDTHH:mm" (cadena estable durante un minuto). */
+export function nowInZone(zone = "America/Chicago", now: Date = new Date()): string {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: zone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(now);
+  const get = (t: string) => parts.find((p) => p.type === t)!.value;
+  return `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}`;
+}

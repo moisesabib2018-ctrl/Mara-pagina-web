@@ -11,9 +11,9 @@ import { MobileNav } from "./MobileNav";
 export function Header({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const items = [
+    { href: homePath(locale, "asesora"), label: dict.nav.advisor },
     { href: homePath(locale, "servicios"), label: dict.nav.services },
     { href: homePath(locale, "proceso"), label: dict.nav.process },
-    { href: homePath(locale, "asesora"), label: dict.nav.advisor },
     { href: homePath(locale, "preguntas"), label: dict.nav.faq },
     { href: homePath(locale, "contacto"), label: dict.nav.contact },
   ];

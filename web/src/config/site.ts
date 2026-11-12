@@ -22,19 +22,54 @@ export const siteConfig = {
     address: null as string | null,
   },
   /** Zona de servicio confirmada por el cliente. La dirección exacta sigue pendiente (contact.address). */
-  location: { city: "Houston", region: "Texas", regionCode: "TX", inPerson: true },
+  location: {
+    city: "Houston",
+    region: "Texas",
+    regionCode: "TX",
+    inPerson: true,
+    /** Fotografía de fondo de "De Houston, para Houston" (Wikimedia Commons, licencia comprobada). Cambiable por una foto propia. */
+    photo: {
+      src: "/images/houston-skyline.jpg",
+      width: 1920,
+      height: 960,
+      // Licencia CC BY 4.0: exige dar crédito al autor, enlazar la licencia e indicar que se modificó (recorte y capa de color).
+      credit: {
+        author: "David Daniel Turner",
+        license: "CC BY 4.0",
+        licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+        sourceUrl: "https://commons.wikimedia.org/wiki/File:Downtown_Houston,_TX_Skyline_-_2018.jpg",
+      },
+    } as {
+      src: string;
+      width: number;
+      height: number;
+      credit?: { author: string; license: string; licenseUrl: string; sourceUrl: string };
+    } | null,
+  },
   advisor: {
     name: "Mariamna Blanchard Hernandez" as string | null,
-    photo: { src: "/images/mariamna-blanchard-hernandez.jpg", width: 1600, height: 1066 } as { src: string; width: number; height: number } | null,
+    photo: { src: "/images/advisor-portrait.jpg", width: 1600, height: 1066 } as { src: string; width: number; height: number } | null,
     bio: null as { es: string; en: string } | null, // biografía y credenciales: pendientes
   },
   locales: ["es", "en"] as const,
   defaultLocale: "es" as const,
   booking: {
+    /**
+     * "preview" = el calendario es solo una VISTA PREVIA del diseño: horarios de ejemplo, no crea citas ni envía datos
+     * y muestra un aviso visible. Pasará a "live" cuando se conecte la API de Google Calendar (pendiente).
+     */
+    mode: "preview" as "preview" | "live",
     consultationMinutes: 45,
-    // Los 15 min de descanso se configuran en Google Calendar y nunca se muestran.
-    /** Enlace público de la página de citas de Google Calendar. Pendiente. */
-    url: publicEnv.bookingUrl, // NEXT_PUBLIC_BOOKING_URL
+    /** Descanso entre consultas: INTERNO, nunca se muestra al cliente (solo separa el inicio de cada horario). */
+    breakMinutes: 15,
+    /** Los horarios se muestran en la hora de la oficina. */
+    timeZone: "America/Chicago",
+    /** Hasta cuántos meses adelante se puede reservar. */
+    maxAdvanceMonths: 3,
+    /** Aviso mínimo antes de una cita (minutos). */
+    minNoticeMinutes: 120,
+    /** Horario de EJEMPLO para la vista previa (el real lo definirá la asesora en Google Calendar). */
+    previewHours: { weekdays: [1, 2, 3, 4, 5], firstHour: 9, lastHour: 16 },
   },
   /** El formulario solo se activa cuando /api/contact esté conectado a un proveedor de email. */
   contactForm: { enabled: false },

@@ -44,3 +44,28 @@ details > summary::-webkit-details-marker {
   to { opacity: 1; transform: none; }
 }
 .rise { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+/*
+ * Una sección por pantalla (solo escritorio ≥1024 px): cada sección ocupa al menos el alto visible (menos el encabezado de
+ * 4,5 rem) y centra su contenido; el desplazamiento se "imanta" suavemente al inicio de cada sección (proximity: nunca
+ * atrapa al visitante, y las secciones más altas que la pantalla se recorren con normalidad). En celular y tablet no aplica.
+ */
+@media (min-width: 1024px) {
+  html {
+    --header-h: calc(4.5rem + 1px); /* alto del encabezado fijo (4,5 rem + su borde) */
+    scroll-snap-type: y proximity;
+    scroll-padding-top: var(--header-h);
+  }
+  .view {
+    min-height: calc(100svh - var(--header-h));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    scroll-snap-align: start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+  }
+}

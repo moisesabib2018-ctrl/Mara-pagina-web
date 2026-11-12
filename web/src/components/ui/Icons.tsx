@@ -80,3 +80,19 @@ export const Plus = (p: IconProps) => (
     <path d="M12 5v14M5 12h14" />
   </Base>
 );
+export const Video = (p: IconProps) => (
+  <Base {...p}>
+    <rect x="3.5" y="6.5" width="12" height="11" rx="2" />
+    <path d="M15.5 10.5l5-3v9l-5-3z" />
+  </Base>
+);
+export const ChevronLeft = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M14.5 6l-6 6 6 6" />
+  </Base>
+);
+export const ChevronRight = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M9.5 6l6 6-6 6" />
+  </Base>
+);

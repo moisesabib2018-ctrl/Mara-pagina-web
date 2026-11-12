@@ -6,6 +6,7 @@ import { getDictionary } from "@/content/ui";
 import { whatsappHref } from "@/lib/contact";
 import { isLocale, locales } from "@/lib/i18n";
 import { homePath } from "@/lib/routes";
+import { BookingProvider } from "@/components/booking/BookingProvider";
 import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -64,6 +65,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           {children}
         </main>
         <Footer locale={locale} />
+        <BookingProvider locale={locale} labels={dict.scheduler} />
         <aside aria-label={dict.a11y.quickActions}>
           <MobileCTABar locale={locale} />
           <WhatsAppFloat locale={locale} />

@@ -5,18 +5,19 @@ type Variant = "primary" | "outline" | "outline-light";
 type Size = "md" | "lg";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-gold text-navy hover:bg-gold-light",
-  outline: "border border-navy/30 text-navy hover:border-navy hover:bg-navy-50",
-  "outline-light": "border border-white/40 text-white hover:border-white hover:bg-white/10",
+  primary:
+    "bg-gold text-navy shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_8px_18px_-10px_rgba(183,139,64,0.9)] hover:-translate-y-px hover:bg-gold-light active:translate-y-0",
+  outline: "border border-navy/30 bg-white/60 text-navy hover:-translate-y-px hover:border-navy hover:bg-white active:translate-y-0",
+  "outline-light": "border border-white/40 text-white hover:-translate-y-px hover:border-white hover:bg-white/10 active:translate-y-0",
 };
 const sizes: Record<Size, string> = {
   md: "min-h-11 px-5 text-sm",
-  lg: "min-h-12 px-6 text-base",
+  lg: "min-h-12 px-7 text-base",
 };
 
 export function buttonClass({ variant = "primary", size = "md", className }: { variant?: Variant; size?: Size; className?: string } = {}) {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors",
+    "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200",
     variants[variant],
     sizes[size],
     className,

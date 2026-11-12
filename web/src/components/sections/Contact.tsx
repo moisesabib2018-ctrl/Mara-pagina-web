@@ -12,7 +12,7 @@ export function Contact({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
   const channels = getChannels(locale);
   return (
-    <section id="contacto" aria-labelledby="contacto-title" className="bg-ivory py-16 sm:py-24">
+    <section id="contacto" aria-labelledby="contacto-title" className="view bg-ivory py-16 sm:py-24">
       <Container className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <div>
           <SectionHeading id="contacto-title" eyebrow={dict.contact.eyebrow} title={dict.contact.title} text={siteConfig.contactForm.enabled ? dict.contact.text : dict.contact.builder.text} />
@@ -39,7 +39,7 @@ export function Contact({ locale }: { locale: Locale }) {
             </div>
           ) : null}
         </div>
-        <div className="rounded-lg border border-line bg-white p-6 sm:p-8">
+        <div className="rounded-2xl border border-line bg-white p-6 shadow-[0_22px_44px_-30px_rgba(4,27,60,0.35)] sm:p-8">
           {/* Con proveedor de correo conectado: formulario. Mientras tanto: generador de solicitud (funciona hoy, sin enviar nada). */}
           {siteConfig.contactForm.enabled ? (
             <ContactForm

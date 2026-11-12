@@ -52,14 +52,20 @@ export function KeyDates({ cards, labels }: { cards: KeyDateCard[]; labels: Dict
   if (visible.length === 0) return null;
 
   return (
-    <section id="fechas" aria-labelledby="fechas-title" className="bg-ivory py-16 sm:py-24">
+    <section id="fechas" aria-labelledby="fechas-title" className="view bg-ivory py-16 sm:py-24">
       <Container>
         <SectionHeading id="fechas-title" eyebrow={labels.eyebrow} title={labels.title} text={labels.text} />
         <ul className="mt-12 grid gap-5 md:grid-cols-3">
           {visible.map(({ item, title, text, note, range, status }) => {
             const p = status ? pill(status, labels) : null;
             return (
-              <li key={item.id} className="flex flex-col rounded-xl border border-line border-t-[3px] border-t-gold bg-white p-7">
+              <li
+                key={item.id}
+                className={cn(
+                  "flex flex-col rounded-2xl border bg-white p-7 shadow-[0_1px_2px_rgba(4,27,60,0.04)]",
+                  status?.state === "open" ? "border-gold/70 shadow-[0_18px_40px_-26px_rgba(183,139,64,0.7)]" : "border-line",
+                )}
+              >
                 <div className="min-h-8">
                   {p ? (
                     <span className={cn("inline-block rounded-full px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em]", tones[p.tone])}>
@@ -67,9 +73,9 @@ export function KeyDates({ cards, labels }: { cards: KeyDateCard[]; labels: Dict
                     </span>
                   ) : null}
                 </div>
-                <h3 className="mt-4 font-serif text-2xl leading-snug text-navy">{title}</h3>
-                <p className="mt-2 font-semibold text-gold-dark">{range}</p>
-                <p className="mt-3 leading-relaxed text-ink-soft">{text}</p>
+                <h3 className="mt-5 font-serif text-2xl leading-snug text-navy">{title}</h3>
+                <p className="mt-2 text-lg font-semibold text-gold-dark">{range}</p>
+                <p className="mt-4 border-t border-line pt-4 leading-relaxed text-ink-soft">{text}</p>
                 {note ? <p className="mt-3 border-l-2 border-gold/60 pl-3 text-sm leading-relaxed text-ink-soft">{note}</p> : null}
               </li>
             );
