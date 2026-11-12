@@ -22,7 +22,7 @@ export function Booking({ locale }: { locale: Locale }) {
       <Container>
         <SectionHeading id="agenda-title" light eyebrow={dict.booking.eyebrow} title={dict.booking.title} text={dict.booking.text} />
 
-        <div className="mt-10 rounded-lg bg-white p-4 text-navy sm:p-6">
+        <div className="mt-10 rounded-2xl bg-white p-4 text-navy shadow-[0_30px_60px_-30px_rgba(0,0,0,0.5)] sm:p-8">
           {target.kind === "embed" ? (
             <>
               <iframe
@@ -48,7 +48,9 @@ export function Booking({ locale }: { locale: Locale }) {
             </div>
           ) : (
             <div className="flex flex-col items-start gap-4 p-2 sm:p-6">
-              <Calendar width={28} height={28} className="text-gold-dark" />
+              <span className="flex size-12 items-center justify-center rounded-full border border-gold/40 bg-gold-tint text-gold-dark">
+                <Calendar width={24} height={24} />
+              </span>
               <h3 className="font-serif text-2xl text-navy">{dict.booking.pendingTitle}</h3>
               <p className="max-w-xl text-ink-soft">{dict.booking.pendingText}</p>
               <div className="flex flex-col gap-3 sm:flex-row">

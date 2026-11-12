@@ -76,7 +76,7 @@ export function Footer({ locale }: { locale: Locale }) {
       </Container>
 
       <div className="border-t border-white/15">
-        <Container className="space-y-2 py-6 text-xs leading-relaxed text-white/60">
+        <Container className="space-y-2 py-6 pr-[4.5rem] text-xs leading-relaxed text-white/60 sm:pr-8">
           <p>{dict.footer.disclaimer}</p>
           <p>{dict.footer.rights}</p>
         </Container>

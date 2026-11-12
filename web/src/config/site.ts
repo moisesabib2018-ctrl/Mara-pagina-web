@@ -22,7 +22,14 @@ export const siteConfig = {
     address: null as string | null,
   },
   /** Zona de servicio confirmada por el cliente. La dirección exacta sigue pendiente (contact.address). */
-  location: { city: "Houston", region: "Texas", regionCode: "TX", inPerson: true },
+  location: {
+    city: "Houston",
+    region: "Texas",
+    regionCode: "TX",
+    inPerson: true,
+    /** Fotografía de fondo de la sección "De Houston, para Houston". Pendiente: solo con licencia de uso comprobada. */
+    photo: null as { src: string; width: number; height: number; credit?: string } | null,
+  },
   advisor: {
     name: "Mariamna Blanchard Hernandez" as string | null,
     photo: { src: "/images/mariamna-blanchard-hernandez.jpg", width: 1600, height: 1066 } as { src: string; width: number; height: number } | null,

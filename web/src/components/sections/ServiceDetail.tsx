@@ -13,9 +13,12 @@ import { Eyebrow } from "@/components/ui/SectionHeading";
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="border-t border-navy/20 pt-6">
-      <h2 className="font-serif text-2xl text-navy sm:text-3xl">{title}</h2>
-      <div className="mt-5">{children}</div>
+    <section className="rounded-2xl border border-line bg-white p-6 shadow-[0_1px_2px_rgba(4,27,60,0.04)] sm:p-8">
+      <h2 className="flex items-center gap-3 font-serif text-2xl text-navy sm:text-3xl">
+        <span className="h-6 w-1 rounded-full bg-gold" aria-hidden="true" />
+        {title}
+      </h2>
+      <div className="mt-6">{children}</div>
     </section>
   );
 }
@@ -60,8 +63,8 @@ export function ServiceDetail({ locale, service }: { locale: Locale; service: Se
         </Container>
       </section>
 
-      <Container className="grid gap-14 py-16 sm:py-20 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-20">
-        <div className="space-y-14">
+      <Container className="grid gap-10 py-14 sm:py-20 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-14">
+        <div className="space-y-6">
           <Block title={dict.service.forWhom}>
             <ul className="space-y-3">
               {service.forWhom[locale].map((item) => (

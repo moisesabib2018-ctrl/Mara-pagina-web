@@ -39,7 +39,7 @@ export function Contact({ locale }: { locale: Locale }) {
             </div>
           ) : null}
         </div>
-        <div className="rounded-lg border border-line bg-white p-6 sm:p-8">
+        <div className="rounded-2xl border border-line bg-white p-6 shadow-[0_22px_44px_-30px_rgba(4,27,60,0.35)] sm:p-8">
           {/* Con proveedor de correo conectado: formulario. Mientras tanto: generador de solicitud (funciona hoy, sin enviar nada). */}
           {siteConfig.contactForm.enabled ? (
             <ContactForm

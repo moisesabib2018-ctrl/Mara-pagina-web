@@ -13,7 +13,10 @@ export function AdvisorIntro({ locale }: { locale: Locale }) {
     <section id="asesora" aria-labelledby="asesora-title" className="bg-white py-16 sm:py-24">
       <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         {photo ? (
-          <div className="relative mx-auto aspect-square w-full max-w-md overflow-hidden rounded-2xl bg-ivory-200 shadow-[0_28px_56px_-30px_rgba(4,27,60,0.45)]">
+          <div className="relative mx-auto w-full max-w-md">
+            {/* Marco dorado desplazado: da profundidad sin añadir elementos */}
+            <div aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl border border-gold/60" />
+            <div className="relative aspect-square overflow-hidden rounded-2xl bg-ivory-200 shadow-[0_28px_56px_-30px_rgba(4,27,60,0.45)]">
             <Image
               src={photo.src}
               width={photo.width}
@@ -22,6 +25,7 @@ export function AdvisorIntro({ locale }: { locale: Locale }) {
               alt={`${name ?? ""}${dict.hero.photoAlt}`}
               className="size-full object-cover object-[28%_18%]"
             />
+            </div>
           </div>
         ) : (
           <div className="mx-auto w-full max-w-sm rounded-lg border border-line bg-white p-8">
