@@ -36,13 +36,8 @@ const es = {
     eyebrow: "Taxes · Empresas · Seguros",
     titleLead: "Taxes, empresas y seguros, con",
     titleAccent: "atención personal.",
-    text: "Asesoría en español e inglés para tus impuestos, tu empresa y la protección de tu familia. Agenda una consulta de 45 minutos y resuelve tus dudas.",
+    text: "Tus impuestos, tu negocio y tu familia merecen más que una respuesta rápida. Merecen alguien que te escuche, te oriente con claridad y te acompañe paso a paso. Atención cercana y personalizada.",
   },
-  trust: [
-    { value: "6", label: "servicios en un solo lugar" },
-    { value: "45 min", label: "por consulta" },
-    { value: "Houston, TX", label: "atención en persona" },
-  ],
   services: {
     eyebrow: "Servicios",
     title: "Elige el servicio que necesitas",
@@ -227,13 +222,8 @@ const en: Dictionary = {
     eyebrow: "Taxes · Business · Insurance",
     titleLead: "Taxes, business, and insurance, with",
     titleAccent: "personal attention.",
-    text: "Guidance in English and Spanish for your taxes, your business, and your family's protection. Book a 45-minute consultation and get your questions answered.",
+    text: "Your taxes, your business, and your family deserve more than a quick answer. They deserve someone who listens, guides you clearly, and walks with you step by step. Close, personalized attention.",
   },
-  trust: [
-    { value: "6", label: "services in one place" },
-    { value: "45 min", label: "per consultation" },
-    { value: "Houston, TX", label: "in-person service" },
-  ],
   services: {
     eyebrow: "Services",
     title: "Choose the service you need",

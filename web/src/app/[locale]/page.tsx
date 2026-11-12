@@ -12,7 +12,6 @@ import { KeyDatesSection } from "@/components/sections/KeyDatesSection";
 import { LocalBand } from "@/components/sections/LocalBand";
 import { Process } from "@/components/sections/Process";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
-import { TrustStrip } from "@/components/sections/TrustStrip";
 import { JsonLd } from "@/components/ui/JsonLd";
 
 const tagline = { es: "Taxes, empresas y seguros", en: "Taxes, business and insurance" } as const;
@@ -36,7 +35,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <JsonLd data={faqJsonLd(locale)} />
       <JsonLd data={organizationJsonLd()} />
       <Hero locale={locale} />
-      <TrustStrip locale={locale} />
       <AdvisorIntro locale={locale} />
       <ServiceGrid locale={locale} />
       <Process locale={locale} />
