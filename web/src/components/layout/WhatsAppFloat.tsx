@@ -5,7 +5,7 @@ import { Message } from "@/components/ui/Icons";
 
 /** Botón flotante de WhatsApp (escritorio; en celular está en la barra inferior). Solo con número confirmado. */
 export function WhatsAppFloat({ locale }: { locale: Locale }) {
-  const wa = whatsappHref();
+  const wa = whatsappHref(locale);
   if (!wa) return null;
   const label = getDictionary(locale).cta.whatsapp;
   return (

@@ -13,6 +13,7 @@ const es = {
     language: "Cambiar idioma",
     home: "Blanchard Group LLC, ir al inicio",
     breadcrumb: "Ruta de navegación",
+    quickActions: "Acciones rápidas",
   },
   nav: {
     services: "Servicios",
@@ -29,6 +30,7 @@ const es = {
     viewServices: "Ver servicios",
     learnMore: "Ver servicio",
     instagram: "Instagram",
+    whatsappMessage: "Hola, quisiera información sobre los servicios de Blanchard Group LLC.",
   },
   hero: {
     eyebrow: "Taxes · Empresas · Seguros",
@@ -127,6 +129,7 @@ const es = {
     placeholder: "Escribe tu pregunta",
     send: "Enviar",
     error: "No pude responder ahora. Puedes agendar una consulta o escribirnos.",
+    tooMany: "Has enviado muchos mensajes. Inténtalo más tarde o agenda una consulta.",
     quickServices: "Ver servicios",
     quickBook: "Agendar una consulta",
     quickWhatsapp: "Escribir por WhatsApp",
@@ -163,6 +166,7 @@ const en: Dictionary = {
     language: "Change language",
     home: "Blanchard Group LLC, go to home",
     breadcrumb: "Breadcrumb",
+    quickActions: "Quick actions",
   },
   nav: {
     services: "Services",
@@ -179,6 +183,7 @@ const en: Dictionary = {
     viewServices: "View services",
     learnMore: "View service",
     instagram: "Instagram",
+    whatsappMessage: "Hello, I would like information about Blanchard Group LLC's services.",
   },
   hero: {
     eyebrow: "Taxes · Business · Insurance",
@@ -277,6 +282,7 @@ const en: Dictionary = {
     placeholder: "Type your question",
     send: "Send",
     error: "I couldn't answer right now. You can book a consultation or write to us.",
+    tooMany: "You have sent many messages. Please try again later or book a consultation.",
     quickServices: "View services",
     quickBook: "Book a consultation",
     quickWhatsapp: "Message us on WhatsApp",

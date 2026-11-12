@@ -17,23 +17,20 @@ export function Hero({ locale }: { locale: Locale }) {
 
       <Container className="relative grid gap-12 py-14 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16 lg:py-28">
         <div>
-          <p className="rise inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+          <p className="inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-navy">
             <span className="size-1.5 rounded-full bg-gold" aria-hidden="true" />
             {hero.eyebrow}
           </p>
-          <h1
-            className="rise mt-6 text-balance font-serif text-[2.75rem] leading-[1.04] tracking-tight text-navy sm:text-6xl lg:text-[4.4rem]"
-            style={{ animationDelay: "80ms" }}
-          >
+          <h1 className="mt-6 text-balance font-serif text-[2.75rem] leading-[1.04] tracking-tight text-navy sm:text-6xl lg:text-[4.4rem]">
             {hero.titleLead}{" "}
             <em className="whitespace-nowrap bg-[linear-gradient(transparent_64%,rgb(183_139_64/0.38)_64%)] pr-1 italic">
               {hero.titleAccent}
             </em>
           </h1>
-          <p className="rise mt-7 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl" style={{ animationDelay: "160ms" }}>
+          <p className="mt-7 max-w-xl text-lg leading-relaxed text-ink-soft sm:text-xl">
             {hero.text}
           </p>
-          <div className="rise mt-9 flex flex-col gap-3 sm:flex-row" style={{ animationDelay: "240ms" }}>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <ButtonLink href={homePath(locale, "agenda")} size="lg">
               {dict.cta.book}
               <ArrowRight />

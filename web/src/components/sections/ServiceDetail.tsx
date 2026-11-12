@@ -22,7 +22,7 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
 
 export function ServiceDetail({ locale, service }: { locale: Locale; service: Service }) {
   const dict = getDictionary(locale);
-  const wa = whatsappHref();
+  const wa = whatsappHref(locale);
   const others = services.filter((s) => s.id !== service.id);
 
   return (
@@ -44,8 +44,8 @@ export function ServiceDetail({ locale, service }: { locale: Locale; service: Se
             </ol>
           </nav>
           <Eyebrow className="mt-8">{dict.services.eyebrow}</Eyebrow>
-          <h1 className="rise mt-4 text-balance font-serif text-5xl leading-[1.05] tracking-tight text-navy sm:text-6xl">{service.name[locale]}</h1>
-          <p className="rise mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl" style={{ animationDelay: "100ms" }}>{service.lead[locale]}</p>
+          <h1 className="mt-4 text-balance font-serif text-5xl leading-[1.05] tracking-tight text-navy sm:text-6xl">{service.name[locale]}</h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl">{service.lead[locale]}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink href={homePath(locale, "agenda")} size="lg">
               {dict.cta.book}

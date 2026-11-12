@@ -23,7 +23,7 @@ export function LanguageSwitch({ locale, label, className }: { locale: Locale; l
             href={switchLocalePath(pathname, o.locale)}
             hrefLang={o.locale}
             lang={o.locale}
-            aria-label={o.name}
+            aria-label={`${o.label} – ${o.name}`}
             aria-current={active ? "true" : undefined}
             className={cn(
               "flex min-h-9 min-w-10 items-center justify-center px-2.5 transition-colors first:rounded-l-[5px] last:rounded-r-[5px]",

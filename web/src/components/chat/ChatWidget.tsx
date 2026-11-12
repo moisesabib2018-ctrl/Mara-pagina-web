@@ -8,21 +8,22 @@ import { Chat, Close } from "@/components/ui/Icons";
 type Message = { role: "user" | "assistant"; content: string };
 
 /**
- * Interfaz del asistente. Con `enabled=false` (sin proveedor de IA conectado) NO simula
- * respuestas: muestra el aviso y accesos directos. Con `enabled=true` llama a /api/chat.
+ * Interfaz del asistente. Consulta GET /api/chat para saber si hay un proveedor de IA conectado.
+ * Si no lo hay, NO simula respuestas: muestra el aviso y accesos directos.
  */
 export function ChatWidget({
   locale,
-  enabled,
   labels,
   links,
 }: {
   locale: Locale;
-  enabled: boolean;
   labels: Dictionary["chat"];
   links: { services: string; booking: string; whatsapp: string | null };
 }) {
   const [open, setOpen] = useState(false);
+  // Estado real del servidor (se consulta una vez al abrir): "checking" | "on" | "off"
+  const [status, setStatus] = useState<"checking" | "on" | "off">("checking");
+  const enabled = status === "on";
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,8 +31,14 @@ export function ChatWidget({
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (open) panelRef.current?.focus();
-  }, [open]);
+    if (!open) return;
+    panelRef.current?.focus();
+    if (status !== "checking") return;
+    fetch("/api/chat", { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : { enabled: false }))
+      .then((d: { enabled?: boolean }) => setStatus(d.enabled ? "on" : "off"))
+      .catch(() => setStatus("off"));
+  }, [open, status]);
   useEffect(() => {
     endRef.current?.scrollIntoView({ block: "end" });
   }, [messages, loading]);
@@ -51,7 +58,7 @@ export function ChatWidget({
         body: JSON.stringify({ locale, messages: next.slice(-12) }),
       });
       const data = (await res.json()) as { reply?: string };
-      setMessages([...next, { role: "assistant", content: res.ok && data.reply ? data.reply : labels.error }]);
+      setMessages([...next, { role: "assistant", content: res.ok && data.reply ? data.reply : res.status === 429 ? labels.tooMany : labels.error }]);
     } catch {
       setMessages([...next, { role: "assistant", content: labels.error }]);
     } finally {
@@ -95,7 +102,7 @@ export function ChatWidget({
 
           <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4 text-sm">
             <p className="rounded-md bg-mist-100 px-3.5 py-3 leading-relaxed text-navy">{labels.greeting}</p>
-            {!enabled ? <p className="rounded-md border border-gold/50 bg-gold-tint px-3.5 py-3 leading-relaxed text-navy">{labels.unavailable}</p> : null}
+            {status === "off" ? <p className="rounded-md border border-gold/50 bg-gold-tint px-3.5 py-3 leading-relaxed text-navy">{labels.unavailable}</p> : null}
             {messages.map((m, i) => (
               <p
                 key={i}

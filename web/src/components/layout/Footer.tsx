@@ -9,7 +9,7 @@ import { Logo } from "./Logo";
 
 export function Footer({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
-  const channels = getChannels();
+  const channels = getChannels(locale);
   const linkClass = "inline-flex min-h-9 items-center text-sm text-white/75 transition-colors hover:text-white";
 
   return (

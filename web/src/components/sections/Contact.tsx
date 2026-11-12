@@ -16,7 +16,7 @@ const channelIcon: Record<Channel["key"], React.ComponentType<React.SVGProps<SVG
 
 export function Contact({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
-  const channels = getChannels();
+  const channels = getChannels(locale);
   return (
     <section id="contacto" aria-labelledby="contacto-title" className="bg-ivory py-16 sm:py-24">
       <Container className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
