@@ -5,6 +5,7 @@ import { getDateStatus, todayInZone, type DateStatus } from "@/lib/dates";
 import type { KeyDate } from "@/content/key-dates";
 import type { Dictionary } from "@/content/ui";
 import { cn } from "@/lib/cn";
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -59,24 +60,37 @@ export function KeyDates({ cards, labels }: { cards: KeyDateCard[]; labels: Dict
           {visible.map(({ item, title, text, note, range, status }) => {
             const p = status ? pill(status, labels) : null;
             return (
-              <li
-                key={item.id}
-                className={cn(
-                  "flex flex-col rounded-2xl border bg-white p-7 shadow-[0_1px_2px_rgba(4,27,60,0.04)]",
-                  status?.state === "open" ? "border-gold/70 shadow-[0_18px_40px_-26px_rgba(183,139,64,0.7)]" : "border-line",
-                )}
-              >
-                <div className="min-h-8">
-                  {p ? (
-                    <span className={cn("inline-block rounded-full px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em]", tones[p.tone])}>
-                      {p.label}
-                    </span>
-                  ) : null}
-                </div>
-                <h3 className="mt-5 font-serif text-2xl leading-snug text-navy">{title}</h3>
-                <p className="mt-2 text-lg font-semibold text-gold-dark">{range}</p>
-                <p className="mt-4 border-t border-line pt-4 leading-relaxed text-ink-soft">{text}</p>
-                {note ? <p className="mt-3 border-l-2 border-gold/60 pl-3 text-sm leading-relaxed text-ink-soft">{note}</p> : null}
+              <li key={item.id}>
+                <CardContainer containerClassName="h-full" className="h-full w-full">
+                  <CardBody
+                    className={cn(
+                      "flex h-full w-full flex-col rounded-2xl border bg-white p-7 shadow-[0_1px_2px_rgba(4,27,60,0.04)]",
+                      status?.state === "open" ? "border-gold/70 shadow-[0_18px_40px_-26px_rgba(183,139,64,0.7)]" : "border-line",
+                    )}
+                  >
+                    <CardItem translateZ={40} className="min-h-8">
+                      {p ? (
+                        <span className={cn("inline-block rounded-full px-3.5 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.12em]", tones[p.tone])}>
+                          {p.label}
+                        </span>
+                      ) : null}
+                    </CardItem>
+                    <CardItem as="h3" translateZ={50} className="mt-5 font-serif text-2xl leading-snug text-navy">
+                      {title}
+                    </CardItem>
+                    <CardItem as="p" translateZ={40} className="mt-2 text-lg font-semibold text-gold-dark">
+                      {range}
+                    </CardItem>
+                    <CardItem as="p" translateZ={20} className="mt-4 border-t border-line pt-4 leading-relaxed text-ink-soft">
+                      {text}
+                    </CardItem>
+                    {note ? (
+                      <CardItem as="p" translateZ={20} className="mt-3 border-l-2 border-gold/60 pl-3 text-sm leading-relaxed text-ink-soft">
+                        {note}
+                      </CardItem>
+                    ) : null}
+                  </CardBody>
+                </CardContainer>
               </li>
             );
           })}

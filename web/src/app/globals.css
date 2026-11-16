@@ -45,6 +45,13 @@ details > summary::-webkit-details-marker {
 }
 .rise { animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
 
+/* Cambio de palabra del titular (ContainerTextFlip): cada letra entra con un leve desenfoque. Solo tras la primera rotación. */
+@keyframes flip-in {
+  from { opacity: 0; filter: blur(8px); }
+  to { opacity: 1; filter: blur(0); }
+}
+.flip-letter { animation: flip-in 0.45s ease-out both; }
+
 /*
  * Una sección por pantalla (solo escritorio ≥1024 px): cada sección ocupa al menos el alto visible (menos el encabezado de
  * 4,5 rem) y centra su contenido; el desplazamiento se "imanta" suavemente al inicio de cada sección (proximity: nunca

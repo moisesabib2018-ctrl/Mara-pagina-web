@@ -2,6 +2,7 @@ import { type Locale } from "@/config/site";
 import { getDictionary } from "@/content/ui";
 import { ArcMotif } from "@/components/ui/ArcMotif";
 import { Container } from "@/components/ui/Container";
+import { ContainerTextFlip } from "@/components/ui/container-text-flip";
 import { HeroVisual } from "./HeroVisual";
 
 /**
@@ -22,7 +23,14 @@ export function Hero({ locale }: { locale: Locale }) {
             {hero.eyebrow}
           </p>
           <h1 className="mt-6 text-balance font-serif text-[2.6rem] leading-[1.04] tracking-tight text-navy sm:text-5xl lg:text-[2.7rem] xl:text-[3rem] 2xl:text-[3.6rem]">
-            {hero.titleLead}{" "}
+            <span className="whitespace-nowrap">
+              <ContainerTextFlip
+                words={hero.flipWords}
+                className="rounded-xl border border-gold/40 bg-white px-3 py-0.5 align-baseline shadow-[0_8px_20px_-12px_rgba(4,27,60,0.45)] sm:px-4"
+              />
+              ,
+            </span>{" "}
+            {hero.titleJoin}{" "}
             <em className="bg-[linear-gradient(transparent_64%,rgb(183_139_64/0.38)_64%)] pr-1 italic [box-decoration-break:clone] sm:whitespace-nowrap">
               {hero.titleAccent}
             </em>
