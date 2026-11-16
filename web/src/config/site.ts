@@ -1,4 +1,4 @@
-import { publicEnv } from "@/lib/public-env";
+import { cleanWhatsapp, publicEnv } from "@/lib/public-env";
 
 /**
  * Datos del sitio. Solo valores confirmados por el cliente.
@@ -15,7 +15,8 @@ export const siteConfig = {
   indexable: publicEnv.indexable,
   contact: {
     // Se configuran con variables de entorno (ver .env.example). null = no se muestra.
-    whatsapp: publicEnv.whatsapp, // NEXT_PUBLIC_WHATSAPP
+    // WhatsApp de la asesora (dato aportado por el cliente). NEXT_PUBLIC_WHATSAPP, si existe, lo reemplaza.
+    whatsapp: publicEnv.whatsapp ?? cleanWhatsapp("3462822240"),
     instagram: publicEnv.instagram, // NEXT_PUBLIC_INSTAGRAM_URL
     email: publicEnv.email, // NEXT_PUBLIC_CONTACT_EMAIL
     phone: publicEnv.phone, // NEXT_PUBLIC_PHONE

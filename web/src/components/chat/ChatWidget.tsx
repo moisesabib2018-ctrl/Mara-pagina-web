@@ -118,8 +118,8 @@ export function ChatWidget({
                 key={i}
                 className={
                   m.role === "user"
-                    ? "ml-8 rounded-md bg-navy px-3.5 py-3 leading-relaxed text-white"
-                    : "mr-8 rounded-md bg-mist-100 px-3.5 py-3 leading-relaxed text-navy"
+                    ? "ml-8 whitespace-pre-line rounded-md bg-navy px-3.5 py-3 leading-relaxed text-white"
+                    : "mr-8 whitespace-pre-line rounded-md bg-mist-100 px-3.5 py-3 leading-relaxed text-navy"
                 }
               >
                 {m.content}

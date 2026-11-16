@@ -12,10 +12,14 @@ export const MAX_TOKENS = 2000; // incluye el razonamiento; las respuestas son b
 
 export type ChatMessage = { role: "user" | "assistant"; content: string };
 
-/** Subconjunto del cliente del SDK que usamos (permite probar con un cliente falso). */
+/** Subconjunto del cliente del SDK de Claude que usamos (permite probar con un cliente falso). */
 export type ChatClient = {
   messages: { create(params: Anthropic.MessageCreateParamsNonStreaming): Promise<Anthropic.Message> };
 };
+
+/** Un proveedor de IA: recibe el prompt de sistema y la conversación; devuelve el texto (o "rechazado"). */
+export type BackendResult = { text: string; refused?: boolean };
+export type ChatBackend = (req: { system: string; messages: ChatMessage[] }) => Promise<BackendResult>;
 
 const fallbackReply: Record<Locale, string> = {
   es: "No pude responder eso con certeza. Para tu caso, agenda una consulta con la asesora o escríbenos.",
@@ -35,28 +39,22 @@ export function normalizeMessages(messages: ChatMessage[]): ChatMessage[] {
   return firstUser === -1 ? [] : cleaned.slice(firstUser);
 }
 
-export async function generateReply(
-  { locale, messages }: { locale: Locale; messages: ChatMessage[] },
-  client: ChatClient,
-  model: string = DEFAULT_MODEL,
-): Promise<string> {
+export async function generateReply({ locale, messages }: { locale: Locale; messages: ChatMessage[] }, backend: ChatBackend): Promise<string> {
   const history = normalizeMessages(messages);
   if (history.length === 0) return fallbackReply[locale];
 
-  const response = await client.messages.create({
-    model,
-    max_tokens: MAX_TOKENS,
-    system: buildSystemPrompt(locale),
-    messages: history,
-    output_config: { effort: "low" },
-  });
+  const result = await backend({ system: buildSystemPrompt(locale), messages: history });
+  // Rechazo por políticas de seguridad del proveedor: respuesta amable en vez de texto vacío.
+  if (result.refused) return fallbackReply[locale];
+  return result.text.trim() || fallbackReply[locale];
+}
 
-  // Rechazo por políticas de seguridad: respuesta amable en vez de texto vacío.
-  if (response.stop_reason === "refusal") return fallbackReply[locale];
-
-  const text = response.content
-    .flatMap((block) => (block.type === "text" ? [block.text] : []))
-    .join("\n")
-    .trim();
-  return text || fallbackReply[locale];
+/** Proveedor Claude (Anthropic). */
+export function anthropicBackend(client: ChatClient, model: string = DEFAULT_MODEL): ChatBackend {
+  return async ({ system, messages }) => {
+    const response = await client.messages.create({ model, max_tokens: MAX_TOKENS, system, messages, output_config: { effort: "low" } });
+    if (response.stop_reason === "refusal") return { text: "", refused: true };
+    const text = response.content.flatMap((block) => (block.type === "text" ? [block.text] : [])).join("\n");
+    return { text };
+  };
 }

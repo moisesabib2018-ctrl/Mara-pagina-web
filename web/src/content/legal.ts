@@ -31,13 +31,13 @@ export const legalDocs: Record<LegalId, LegalDoc> = {
           es: [
             "Formulario de contacto: nombre, apellido, correo electrónico, teléfono (opcional), servicio de interés y tu mensaje.",
             "Solicitud de cita: día y hora elegidos, modalidad (llamada o videollamada), nombre, teléfono y, si eliges videollamada, correo electrónico.",
-            "Asistente virtual: los mensajes que escribes en el chat.",
+            "Asistente virtual: los mensajes que escribes en el chat. Se procesan con un proveedor de inteligencia artificial que, según su plan, puede revisarlos o usarlos para mejorar sus servicios; por eso no debes escribir datos sensibles.",
             "Datos técnicos básicos que registra el servidor (por ejemplo, dirección IP y tipo de navegador) para que el sitio funcione y para prevenir abusos.",
           ],
           en: [
             "Contact form: first name, last name, email, phone (optional), service of interest, and your message.",
             "Appointment request: chosen day and time, format (phone call or video call), name, phone and, if you choose a video call, email.",
-            "Virtual assistant: the messages you type in the chat.",
+            "Virtual assistant: the messages you type in the chat. They are processed by an artificial intelligence provider that, depending on its plan, may review them or use them to improve its services; this is why you should not type sensitive data.",
             "Basic technical data the server records (for example, IP address and browser type) so the site works and to prevent abuse.",
           ],
         },

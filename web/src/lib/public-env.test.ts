@@ -5,6 +5,8 @@ import { buildWhatsappHref } from "./contact";
 describe("limpieza de datos públicos", () => {
   it("WhatsApp: normaliza a dígitos y rechaza valores inválidos", () => {
     expect(cleanWhatsapp("+1 (555) 123-4567")).toBe("15551234567");
+    expect(cleanWhatsapp("3462822240")).toBe("13462822240"); // 10 dígitos de EE. UU.: se agrega el código de país
+    expect(cleanWhatsapp("(346) 282-2240")).toBe("13462822240");
     expect(cleanWhatsapp("123")).toBeNull();
     expect(cleanWhatsapp("")).toBeNull();
     expect(cleanWhatsapp(undefined)).toBeNull();
