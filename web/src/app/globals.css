@@ -52,22 +52,6 @@ details > summary::-webkit-details-marker {
 }
 .flip-letter { animation: flip-in 0.45s ease-out both; }
 
-/* Carrusel infinito de comentarios (dos filas, sentidos opuestos). Se pausa con el botón, al pasar el mouse o con el foco. */
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
-.marquee { mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent); }
-.marquee-track { display: flex; width: max-content; animation: marquee var(--marquee-duration, 60s) linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused !important; }
-.marquee-set { display: flex; align-items: center; gap: 1.25rem; padding-right: 1.25rem; }
-@media (prefers-reduced-motion: reduce) {
-  /* Sin movimiento: las tarjetas se muestran quietas, en filas que se acomodan, sin la copia duplicada. */
-  .marquee { mask-image: none; }
-  .marquee-track { animation: none !important; width: auto; }
-  .marquee-set { flex-wrap: wrap; justify-content: center; padding-right: 0; }
-  .marquee-dup { display: none; }
-}
-
 /*
  * Una sección por pantalla (solo escritorio ≥1024 px): cada sección ocupa al menos el alto visible (menos el encabezado de
  * 4,5 rem) y centra su contenido; el desplazamiento se "imanta" suavemente al inicio de cada sección (proximity: nunca
