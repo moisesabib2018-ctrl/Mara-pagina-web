@@ -54,6 +54,11 @@ export const siteConfig = {
   },
   /** true mientras los textos legales (privacidad y términos) no estén revisados por un abogado: muestra un aviso. */
   legalDraft: true,
+  /**
+   * true mientras no haya comentarios reales de clientes (content/testimonials.ts): muestra la sección con tarjetas de
+   * EJEMPLO y un aviso visible. Poner false (o llenar `testimonials`) antes del lanzamiento; nunca inventar opiniones.
+   */
+  testimonialsPreview: true,
   locales: ["es", "en"] as const,
   defaultLocale: "es" as const,
   booking: {

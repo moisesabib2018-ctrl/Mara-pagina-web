@@ -112,6 +112,15 @@ const es = {
       { q: "¿Puedo usar el sitio en inglés?", a: "Sí. Usa el selector de idioma en la parte superior de la página." },
     ],
   },
+  testimonials: {
+    eyebrow: "Clientes",
+    title: "Personas que confiaron en nosotros",
+    text: "Lo que cuentan quienes ya trabajaron con nosotros.",
+    previewNotice: "Vista previa: estos comentarios son de ejemplo, no son de clientes reales. Se reemplazarán por comentarios verdaderos y autorizados.",
+    sampleTag: "Ejemplo",
+    pause: "Pausar movimiento",
+    play: "Reanudar movimiento",
+  },
   contact: {
     eyebrow: "Contacto",
     title: "Cuéntanos qué necesitas",
@@ -328,6 +337,15 @@ const en: Dictionary = {
       { q: "Does the virtual assistant replace the advisor?", a: "No. The assistant offers general guidance and helps you reach the advisor. For your particular case, book a consultation. For your safety, do not share Social Security numbers, medical details, or banking information in the chat." },
       { q: "Can I use the site in Spanish?", a: "Yes. Use the language selector at the top of the page." },
     ],
+  },
+  testimonials: {
+    eyebrow: "Clients",
+    title: "People who trusted us",
+    text: "What people say after working with us.",
+    previewNotice: "Preview: these comments are samples, not from real clients. They will be replaced with genuine, authorized comments.",
+    sampleTag: "Sample",
+    pause: "Pause motion",
+    play: "Resume motion",
   },
   contact: {
     eyebrow: "Contact",
