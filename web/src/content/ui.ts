@@ -54,15 +54,6 @@ const es = {
       { title: "Sigues con claridad", text: "Sales sabiendo cuáles son los siguientes pasos para tu caso." },
     ],
   },
-  clarity: {
-    eyebrow: "Antes y después",
-    title: "De la confusión a la claridad",
-    text: "Muchas dudas se resuelven al ordenar tu situación y conocer tus siguientes pasos.",
-    before: "Confusión",
-    after: "Claridad",
-    hint: "Arrastra la barra para ver la diferencia.",
-    sliderLabel: "Comparar: dudas y papeles sueltos, o un plan claro",
-  },
   advisor: {
     eyebrow: "Tu asesora",
     title: "Atención personal en cada consulta",
@@ -279,15 +270,6 @@ const en: Dictionary = {
       { title: "We discuss your case", text: "In 45 minutes we review your situation and answer your questions." },
       { title: "You move forward clearly", text: "You leave knowing the next steps for your case." },
     ],
-  },
-  clarity: {
-    eyebrow: "Before and after",
-    title: "From confusion to clarity",
-    text: "Many questions get answered once your situation is organized and you know your next steps.",
-    before: "Confusion",
-    after: "Clarity",
-    hint: "Drag the bar to see the difference.",
-    sliderLabel: "Compare: questions and loose papers, or a clear plan",
   },
   advisor: {
     eyebrow: "Your advisor",

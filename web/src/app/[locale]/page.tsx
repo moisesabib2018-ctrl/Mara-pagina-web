@@ -6,7 +6,6 @@ import { isLocale, locales } from "@/lib/i18n";
 import { AdvisorIntro } from "@/components/sections/AdvisorIntro";
 import { Booking } from "@/components/sections/Booking";
 import { Contact } from "@/components/sections/Contact";
-import { ClarityCompare } from "@/components/sections/ClarityCompare";
 import { FAQ } from "@/components/sections/FAQ";
 import { Hero } from "@/components/sections/Hero";
 import { KeyDatesSection } from "@/components/sections/KeyDatesSection";
@@ -39,7 +38,6 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <AdvisorIntro locale={locale} />
       <ServiceGrid locale={locale} />
       <Process locale={locale} />
-      <ClarityCompare locale={locale} />
       <KeyDatesSection locale={locale} />
       <Booking locale={locale} />
       <FAQ locale={locale} />
