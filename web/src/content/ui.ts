@@ -34,7 +34,8 @@ const es = {
   },
   hero: {
     eyebrow: "Taxes · Empresas · Seguros",
-    titleLead: "Taxes, empresas y seguros, con",
+    flipWords: ["Taxes", "Empresas", "Seguros"],
+    titleJoin: "con",
     titleAccent: "atención personalizada.",
     text: "Tus impuestos, tu negocio y tu familia merecen más que una respuesta rápida. Merecen alguien que te escuche, te oriente con claridad y te acompañe paso a paso. Atención cercana y personalizada.",
   },
@@ -110,6 +111,15 @@ const es = {
       { q: "¿El asistente virtual reemplaza a la asesora?", a: "No. El asistente ofrece orientación general y te ayuda a llegar a la asesora. Para tu caso particular, agenda una consulta. Por tu seguridad, no compartas números de seguro social, datos médicos ni información bancaria en el chat." },
       { q: "¿Puedo usar el sitio en inglés?", a: "Sí. Usa el selector de idioma en la parte superior de la página." },
     ],
+  },
+  testimonials: {
+    eyebrow: "Clientes",
+    title: "Personas que confiaron en nosotros",
+    text: "Lo que cuentan quienes ya trabajaron con nosotros.",
+    previewNotice: "Vista previa: estos comentarios son de ejemplo, no son de clientes reales. Se reemplazarán por comentarios verdaderos y autorizados.",
+    sampleTag: "Ejemplo",
+    pause: "Pausar movimiento",
+    play: "Reanudar movimiento",
   },
   contact: {
     eyebrow: "Contacto",
@@ -250,7 +260,8 @@ const en: Dictionary = {
   },
   hero: {
     eyebrow: "Taxes · Business · Insurance",
-    titleLead: "Taxes, business, and insurance, with",
+    flipWords: ["Taxes", "Business", "Insurance"],
+    titleJoin: "with",
     titleAccent: "personalized attention.",
     text: "Your taxes, your business, and your family deserve more than a quick answer. They deserve someone who listens, guides you clearly, and walks with you step by step. Close, personalized attention.",
   },
@@ -326,6 +337,15 @@ const en: Dictionary = {
       { q: "Does the virtual assistant replace the advisor?", a: "No. The assistant offers general guidance and helps you reach the advisor. For your particular case, book a consultation. For your safety, do not share Social Security numbers, medical details, or banking information in the chat." },
       { q: "Can I use the site in Spanish?", a: "Yes. Use the language selector at the top of the page." },
     ],
+  },
+  testimonials: {
+    eyebrow: "Clients",
+    title: "People who trusted us",
+    text: "What people say after working with us.",
+    previewNotice: "Preview: these comments are samples, not from real clients. They will be replaced with genuine, authorized comments.",
+    sampleTag: "Sample",
+    pause: "Pause motion",
+    play: "Resume motion",
   },
   contact: {
     eyebrow: "Contact",

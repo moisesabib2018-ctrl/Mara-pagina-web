@@ -15,10 +15,13 @@ export const CardContainer = ({
   children,
   className,
   containerClassName,
+  tiltDivisor = 25,
 }: {
   children?: React.ReactNode;
   className?: string;
   containerClassName?: string;
+  /** Mayor = inclinación más suave. Útil en tarjetas muy anchas (por defecto 25, como el original). */
+  tiltDivisor?: number;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
@@ -28,8 +31,8 @@ export const CardContainer = ({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current || reducedMotion()) return;
     const { left, top, width, height } = containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / 25;
-    const y = (e.clientY - top - height / 2) / 25;
+    const x = (e.clientX - left - width / 2) / tiltDivisor;
+    const y = (e.clientY - top - height / 2) / tiltDivisor;
     containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
   };
 

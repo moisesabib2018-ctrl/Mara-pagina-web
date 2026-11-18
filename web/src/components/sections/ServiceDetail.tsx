@@ -5,6 +5,7 @@ import { getDictionary } from "@/content/ui";
 import { whatsappHref } from "@/lib/contact";
 import { homePath, servicePath } from "@/lib/routes";
 import type { Service } from "@/types/service";
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { ArcMotif } from "@/components/ui/ArcMotif";
@@ -13,12 +14,18 @@ import { Eyebrow } from "@/components/ui/SectionHeading";
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl border border-line bg-white p-6 shadow-[0_1px_2px_rgba(4,27,60,0.04)] sm:p-8">
-      <h2 className="flex items-center gap-3 font-serif text-2xl text-navy sm:text-3xl">
-        <span className="h-6 w-1 rounded-full bg-gold" aria-hidden="true" />
-        {title}
-      </h2>
-      <div className="mt-6">{children}</div>
+    <section>
+      <CardContainer tiltDivisor={70} containerClassName="w-full" className="w-full">
+        <CardBody className="w-full rounded-2xl border border-line bg-white p-6 shadow-[0_1px_2px_rgba(4,27,60,0.04)] sm:p-8">
+          <CardItem as="h2" translateZ={30} className="flex items-center gap-3 font-serif text-2xl text-navy sm:text-3xl">
+            <span className="h-6 w-1 rounded-full bg-gold" aria-hidden="true" />
+            {title}
+          </CardItem>
+          <CardItem translateZ={15} className="mt-6">
+            {children}
+          </CardItem>
+        </CardBody>
+      </CardContainer>
     </section>
   );
 }
@@ -101,19 +108,29 @@ export function ServiceDetail({ locale, service }: { locale: Locale; service: Se
         </div>
 
         <aside className="lg:self-start lg:sticky lg:top-28">
-          <div className="rounded-2xl bg-navy p-7 text-white shadow-[0_28px_56px_-28px_rgba(4,27,60,0.6)]">
-            <p className="font-serif text-5xl leading-none text-gold-light">45<span className="ml-1 text-lg">min</span></p>
-            <h2 className="mt-4 font-serif text-2xl">{dict.service.aside}</h2>
-            <p className="mt-3 leading-relaxed text-white/75">{dict.service.asideText}</p>
-            <ButtonLink href={homePath(locale, "agenda")} size="lg" className="mt-6 w-full">
-              {dict.cta.book}
-            </ButtonLink>
-            {wa ? (
-              <ButtonLink href={wa} external variant="outline-light" size="lg" className="mt-3 w-full">
-                {dict.cta.whatsapp}
-              </ButtonLink>
-            ) : null}
-          </div>
+          <CardContainer tiltDivisor={45} containerClassName="w-full" className="w-full">
+            <CardBody className="w-full rounded-2xl bg-navy p-7 text-white shadow-[0_28px_56px_-28px_rgba(4,27,60,0.6)]">
+              <CardItem as="p" translateZ={40} className="font-serif text-5xl leading-none text-gold-light">
+                45<span className="ml-1 text-lg">min</span>
+              </CardItem>
+              <CardItem as="h2" translateZ={40} className="mt-4 font-serif text-2xl">
+                {dict.service.aside}
+              </CardItem>
+              <CardItem as="p" translateZ={25} className="mt-3 leading-relaxed text-white/75">
+                {dict.service.asideText}
+              </CardItem>
+              <CardItem translateZ={30} className="mt-6">
+                <ButtonLink href={homePath(locale, "agenda")} size="lg" className="w-full">
+                  {dict.cta.book}
+                </ButtonLink>
+                {wa ? (
+                  <ButtonLink href={wa} external variant="outline-light" size="lg" className="mt-3 w-full">
+                    {dict.cta.whatsapp}
+                  </ButtonLink>
+                ) : null}
+              </CardItem>
+            </CardBody>
+          </CardContainer>
         </aside>
       </Container>
 
